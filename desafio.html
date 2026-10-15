@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#3b9eff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Desafiei">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/img/coruja-192.png">
+<link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Desafio • Desafiei</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width:820px">
+
+        <!-- Botão voltar -->
+        <div class="card fade-in" style="padding:10px;display:flex;justify-content:space-between;align-items:center">
+           <a href="#" onclick="event.preventDefault(); transicaoBolha('/dashboard')" class="btn btn-secundario">⬅️ Sair</a>
+            <div id="titulo-desafio" style="font-weight:800;color:var(--texto-sec)">Carregando...</div>
+        </div>
+
+        <!-- Área do fluxo de atividades -->
+        <div id="area-desafio" class="fade-in"></div>
+    </div>
+
+    <!-- Coruja -->
+    <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>
+    <script>
+        // Ao carregar a página de desafio, inicia o fluxo
+        window.addEventListener("DOMContentLoaded", () => {
+            iniciarPaginaDesafio();
+        });
+    </script>
+
+    <script>
+// 🌍 Registra o Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("🌍 Service Worker ativado"))
+            .catch(err => console.warn("Erro no SW:", err));
+    });
+}
+
+// 🔔 Pede permissão para notificações (uma vez)
+if ("Notification" in window && Notification.permission === "default") {
+    // Espera o usuário interagir com a página primeiro (melhor UX)
+    document.body.addEventListener("click", async () => {
+        if (Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+    }, { once: true });
+}
+</script>
+</body>
+</html>

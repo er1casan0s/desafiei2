@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#3b9eff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Desafiei">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/img/coruja-192.png">
+<link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Ranking • Desafiei</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="card fade-in" style="text-align:center;background:var(--grad-hero);color:#fff;border:none">
+            <div style="font-size:52px;margin-bottom:6px">🏆</div>
+            <h1 style="color:#fff">Ranking Desafiei</h1>
+            <p style="opacity:0.9">Top 50 alunos por XP</p>
+        </div>
+
+        <div id="lista-ranking" class="fade-in" style="animation-delay:0.1s"></div>
+
+        <div class="card fade-in" style="text-align:center">
+            <a href="#" onclick="event.preventDefault(); transicaoBolha('/dashboard')" class="btn btn-secundario">⬅️ Voltar</a>
+        </div>
+    </div>
+
+    <div class="coruja-guia" id="coruja-guia">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+
+    <!-- Botão flutuante para voltar ao dashboard -->
+<a href="/dashboard" class="btn-flutuante-dash" title="Voltar ao Dashboard">📚</a>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>
+<script>
+// 🌍 Registra o Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("🌍 Service Worker ativado"))
+            .catch(err => console.warn("Erro no SW:", err));
+    });
+}
+
+// 🔔 Pede permissão para notificações (uma vez)
+if ("Notification" in window && Notification.permission === "default") {
+    // Espera o usuário interagir com a página primeiro (melhor UX)
+    document.body.addEventListener("click", async () => {
+        if (Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+    }, { once: true });
+}
+</script>
+
+</body>
+</html>

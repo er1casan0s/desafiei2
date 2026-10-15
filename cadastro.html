@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#3b9eff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Desafiei">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/img/coruja-192.png">
+<link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Cadastro • Desafiei</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width:560px;margin-top:40px">
+        <div class="card" style="text-align:center">
+            <div style="font-size:52px">🦉</div>
+            <h1>Criar conta</h1>
+            <p style="color:var(--texto-sec)">Vamos começar sua jornada!</p>
+        </div>
+
+        <div class="card">
+            <form onsubmit="fazerCadastro(event)">
+                <label>Nome completo *</label>
+                <input type="text" name="nome" required>
+
+                <label>Idade (2 dígitos) *</label>
+                <input type="text" name="idade" maxlength="2" pattern="\d{2}" required>
+
+                <label>Email real (para lembretes) *</label>
+                <input type="email" name="email" required>
+
+                <label>WhatsApp (11 dígitos: DDD + número) *</label>
+                <input type="tel" name="whatsapp" pattern="\d{11}" placeholder="" required>
+
+                                <label>Qual seu nível de conhecimento? *</label>
+                <select name="nivel" required>
+                    <option value="iniciante">🌱 Iniciante — Estou começando agora</option>
+                    <option value="medio">🚀 Médio — Já tenho alguma base</option>
+                    <option value="dificil">🔥 Difícil — Quero desafios avançados</option>
+                </select>
+
+                <label>Qual sua maior dificuldade? <span style="color:var(--texto-sec);font-weight:400">(opcional)</span></label>
+                <textarea name="dificuldade" rows="3"
+                    placeholder="Ex: Tenho dificuldade com ..."></textarea>
+                
+                    <label>Senha (livre) *</label>
+                <input type="password" name="senha" required minlength="4">
+
+                <label>Foto de perfil (opcional)</label>
+                <input type="file" accept="image/*" onchange="converterFoto(this)">
+
+                <label>Ou escolha um avatar emoji:</label>
+                <select name="avatar_emoji">
+                    <option value="🦉">🦉 Coruja</option>
+                    <option value="🐱">🐱 Gato</option>
+                    <option value="🐶">🐶 Cachorro</option>
+                    <option value="🦊">🦊 Raposa</option>
+                    <option value="🐼">🐼 Panda</option>
+                    <option value="🦁">🦁 Leão</option>
+                    <option value="🐸">🐸 Sapo</option>
+                    <option value="🐨">🐨 Coala</option>
+                </select>
+
+                <input type="hidden" name="foto" id="foto-base64">
+
+                <button class="btn" type="submit" style="width:100%;margin-top:10px">
+                    Criar conta 🚀
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Converte a imagem para base64 para enviar ao servidor
+        function converterFoto(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById("foto-base64").value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+        <!-- Coruja guia -->
+    <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+    <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>
+
+<script>
+// 🌍 Registra o Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("🌍 Service Worker ativado"))
+            .catch(err => console.warn("Erro no SW:", err));
+    });
+}
+
+// 🔔 Pede permissão para notificações (uma vez)
+if ("Notification" in window && Notification.permission === "default") {
+    // Espera o usuário interagir com a página primeiro (melhor UX)
+    document.body.addEventListener("click", async () => {
+        if (Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+    }, { once: true });
+}
+</script>
+
+</body>
+</html>

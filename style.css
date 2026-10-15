@@ -1,0 +1,2401 @@
+/* ============================================================
+   DESAFIEI 2.0 — Design Moderno + Responsivo
+   Glassmorphism + Gradientes + Animações Suaves
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   FONTES (Google Fonts)
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;900&display=swap');
+
+
+/* ============================================================
+   1. VARIÁVEIS DE TEMA (CLARO - PADRÃO)
+   ============================================================ */
+:root {
+    /* Cores base */
+    --bg-1: #eef5ff;
+    --bg-2: #f7fbff;
+    --card: rgba(255, 255, 255, 0.85);
+    --card-solid: #ffffff;
+    --texto: #0f1c2e;
+    --texto-sec: #64748b;
+    --borda: rgba(148, 187, 233, 0.25);
+
+    /* Cores de marca */
+    --primaria: #3b9eff;
+    --primaria-2: #6bc1ff;
+    --primaria-escura: #1e7ad4;
+    --alegria: #ffcc4d;
+    --alegria-2: #ffb800;
+    --sucesso: #00d68f;
+    --erro: #ff5c7a;
+    --roxo: #8b7cf6;
+
+    /* Gradientes */
+    --grad-primario: linear-gradient(135deg, #3b9eff 0%, #6bc1ff 100%);
+    --grad-alegria: linear-gradient(135deg, #ffcc4d 0%, #ffb800 100%);
+    --grad-sucesso: linear-gradient(135deg, #00d68f 0%, #00b87c 100%);
+    --grad-hero: linear-gradient(135deg, #3b9eff 0%, #8b7cf6 50%, #ffcc4d 100%);
+
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(59, 158, 255, 0.08);
+    --shadow-md: 0 8px 24px rgba(59, 158, 255, 0.12);
+    --shadow-lg: 0 20px 48px rgba(59, 158, 255, 0.18);
+    --shadow-glow: 0 0 40px rgba(59, 158, 255, 0.35);
+
+    /* Raios */
+    --radius-sm: 12px;
+    --radius: 18px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+}
+
+
+/* ============================================================
+   2. TEMA ESCURO
+   ============================================================ */
+[data-tema="escuro"] {
+    --bg-1: #0a1220;
+    --bg-2: #0f1c2e;
+    --card: rgba(23, 36, 54, 0.75);
+    --card-solid: #172436;
+    --texto: #eef5ff;
+    --texto-sec: #94a3b8;
+    --borda: rgba(148, 187, 233, 0.15);
+
+    --primaria: #58b4ff;
+    --primaria-2: #7cc4ff;
+    --primaria-escura: #3b9eff;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 40px rgba(88, 180, 255, 0.4);
+}
+
+
+/* ============================================================
+   3. RESET E ESTILOS GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Evita "pulos" ao trocar o tema em iOS */
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--bg-1);
+    background-image:
+        radial-gradient(at 10% 0%, rgba(59, 158, 255, 0.15) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(255, 204, 77, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(139, 124, 246, 0.12) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--texto);
+    min-height: 100vh;
+    line-height: 1.6;
+    transition: background 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    /* Evita barra horizontal em mobile */
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+
+a {
+    color: var(--primaria);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+a:hover { opacity: 0.8; }
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* ============================================================
+   4. CONTAINER PRINCIPAL
+   ============================================================ */
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 20px 120px;
+}
+
+
+/* ============================================================
+   5. CARDS (Glassmorphism)
+   ============================================================ */
+.card {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 20px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad-hero);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(59, 158, 255, 0.4);
+}
+
+.card:hover::before { opacity: 1; }
+
+
+/* ============================================================
+   6. BOTÕES
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--grad-primario);
+    color: #fff;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(59, 158, 255, 0.35);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(59, 158, 255, 0.5);
+}
+
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: translateY(-1px) scale(0.99); }
+
+.btn-secundario {
+    background: var(--card-solid);
+    color: var(--texto);
+    border: 2px solid var(--borda);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secundario:hover {
+    border-color: var(--primaria);
+    color: var(--primaria);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-alegria {
+    background: var(--grad-alegria);
+    color: #6b4c00;
+    box-shadow: 0 6px 18px rgba(255, 184, 0, 0.4);
+}
+
+.btn-sucesso {
+    background: var(--grad-sucesso);
+    box-shadow: 0 6px 18px rgba(0, 214, 143, 0.4);
+}
+
+.btn-perigo {
+    background: linear-gradient(135deg, #ff5c7a 0%, #e63e5c 100%);
+    box-shadow: 0 6px 18px rgba(255, 92, 122, 0.4);
+}
+
+
+/* ============================================================
+   7. INPUTS E FORMULÁRIOS
+   ============================================================ */
+input, textarea, select {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 2px solid var(--borda);
+    background: var(--card-solid);
+    color: var(--texto);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    margin-bottom: 14px;
+    transition: all 0.25s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primaria);
+    box-shadow: 0 0 0 4px rgba(59, 158, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--texto-sec);
+    opacity: 0.7;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--texto-sec);
+    letter-spacing: 0.02em;
+}
+
+
+/* ============================================================
+   8. BARRA DE PROGRESSO / XP (DESTAQUE)
+   ============================================================ */
+.barra-xp-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.barra-xp-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texto-sec);
+    letter-spacing: 0.03em;
+}
+
+.barra-xp-info .xp-atual {
+    color: var(--primaria);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.barra-xp {
+    position: relative;
+    width: 100%;
+    height: 18px;
+    background: rgba(148, 187, 233, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.barra-xp-preenchida {
+    position: relative;
+    height: 100%;
+    background: var(--grad-primario);
+    border-radius: 12px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 20px rgba(59, 158, 255, 0.6);
+    overflow: hidden;
+}
+
+/* Brilho animado que passa por cima */
+.barra-xp-preenchida::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 100%);
+    animation: brilho-passando 2.5s infinite;
+}
+
+@keyframes brilho-passando {
+    0%   { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Barra de progresso GRANDE */
+.barra-xp-grande {
+    height: 28px;
+    border-radius: 16px;
+}
+
+.barra-xp-grande .barra-xp-preenchida {
+    border-radius: 16px;
+    background: linear-gradient(135deg, #3b9eff 0%, #6bc1ff 40%, #8b7cf6 100%);
+}
+
+/* Texto dentro da barra */
+.barra-xp-texto {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   9. BADGE DE ESTÁGIO
+   ============================================================ */
+.badge-estagio {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    background: var(--grad-alegria);
+    color: #6b4c00;
+    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
+    text-transform: uppercase;
+}
+
+/* Cores por estágio */
+.badge-latao    { background: linear-gradient(135deg, #d2a679, #b8834d); color: #fff; }
+.badge-bronze   { background: linear-gradient(135deg, #cd7f32, #a5642a); color: #fff; }
+.badge-prata    { background: linear-gradient(135deg, #cfd8e3, #a4b0c0); color: #1f2d3d; }
+.badge-ouro     { background: linear-gradient(135deg, #ffd700, #ffb800); color: #6b4c00; }
+.badge-platina  { background: linear-gradient(135deg, #8fe3d1, #4bbfae); color: #0b3b32; }
+.badge-esmeralda{ background: linear-gradient(135deg, #34d399, #059669); color: #fff; }
+.badge-rubi     { background: linear-gradient(135deg, #f43f5e, #be123c); color: #fff; }
+.badge-mestre   { background: linear-gradient(135deg, #8b7cf6, #6d28d9); color: #fff; }
+
+.badge-diamante {
+    background: linear-gradient(135deg, #7dd3fc, #e0f2fe, #a5b4fc);
+    background-size: 200% 200%;
+    animation: brilho-diamante 3s infinite;
+    color: #1e3a8a;
+}
+
+@keyframes brilho-diamante {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+
+/* ============================================================
+   10. AVATAR DO USUÁRIO (formato oval)
+   ============================================================ */
+.avatar-usuario {
+    width: 56px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--grad-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 6px 16px rgba(59, 158, 255, 0.3);
+    border: 3px solid var(--card-solid);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.avatar-usuario img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   11. CABEÇALHO DO DASHBOARD
+   ============================================================ */
+.header-usuario {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.header-usuario-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.header-usuario-info h2 {
+    margin-bottom: 2px;
+    font-size: 1.4rem;
+}
+
+.header-usuario-info p {
+    color: var(--texto-sec);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-ofensiva {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff8a3d, #ff5c7a);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(255, 92, 122, 0.4);
+    font-size: 15px;
+}
+
+.header-ofensiva .chama {
+    font-size: 20px;
+    animation: pulsar-chama 1.2s infinite ease-in-out;
+}
+
+@keyframes pulsar-chama {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.2); }
+}
+
+
+/* ============================================================
+   12. MENU DE NAVEGAÇÃO
+   ============================================================ */
+.menu-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 8px;
+    border-radius: var(--radius);
+}
+
+.menu-nav .btn {
+    padding: 10px 18px;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   13. CARTÃO DE DESAFIO
+   ============================================================ */
+.desafio-card {
+    position: relative;
+    padding: 26px;
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-lg);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.desafio-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.materia-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.materia-portugues      { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #78350f; }
+.materia-matematica     { background: linear-gradient(135deg, #dbeafe, #93c5fd); color: #1e3a8a; }
+.materia-conhecimentos  { background: linear-gradient(135deg, #e9d5ff, #c084fc); color: #581c87; }
+.materia-interpretacao  { background: linear-gradient(135deg, #fce7f3, #f9a8d4); color: #831843; }
+
+/* Bloco de texto de apoio (interpretação) */
+.texto-apoio {
+    background: linear-gradient(135deg, rgba(255, 204, 77, 0.10), rgba(139, 124, 246, 0.08));
+    border-left: 4px solid var(--alegria-2);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 12px 0 6px;
+}
+
+.texto-apoio-titulo {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primaria);
+    margin-bottom: 8px;
+}
+
+.texto-apoio-conteudo {
+    font-family: 'Plus Jakarta Sans', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--texto);
+    font-style: italic;
+}
+
+
+/* ============================================================
+   14. OPÇÕES DE RESPOSTA
+   ============================================================ */
+.opcoes-resposta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.opcao-btn {
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 2px solid var(--borda);
+    background: var(--card-solid);
+    color: var(--texto);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-align: center;
+}
+
+.opcao-btn:hover {
+    border-color: var(--primaria);
+    color: var(--primaria);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 158, 255, 0.2);
+}
+
+.opcao-btn.correta {
+    background: var(--grad-sucesso);
+    color: #fff;
+    border-color: transparent;
+    animation: acerto-pulse 0.5s;
+}
+
+.opcao-btn.errada {
+    background: linear-gradient(135deg, #ff5c7a, #e63e5c);
+    color: #fff;
+    border-color: transparent;
+    animation: erro-shake 0.4s;
+}
+
+@keyframes acerto-pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+@keyframes erro-shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-6px); }
+    75%      { transform: translateX(6px); }
+}
+
+/* Verdadeiro/Falso */
+.opcoes-vf {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+}
+
+.opcao-vf {
+    padding: 22px 18px !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    border-width: 3px !important;
+}
+
+.opcao-vf-true  { border-color: #10b981; color: #10b981; }
+.opcao-vf-true:hover  { background: #10b981; color: #fff; }
+.opcao-vf-false { border-color: #ef4444; color: #ef4444; }
+.opcao-vf-false:hover { background: #ef4444; color: #fff; }
+
+/* Completar frase */
+.opcoes-resposta.completar {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+}
+
+.opcoes-resposta.completar .opcao-btn {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 15px;
+}
+
+/* Associação */
+.opcoes-resposta.associacao {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+}
+
+.opcoes-resposta.associacao .opcao-btn {
+    padding: 18px 16px;
+    font-weight: 700;
+    border-width: 3px;
+}
+
+.opcoes-resposta.associacao .opcao-btn:hover {
+    border-color: var(--roxo);
+    color: var(--roxo);
+    box-shadow: 0 6px 16px rgba(139, 124, 246, 0.3);
+}
+
+
+/* ============================================================
+   15. RANKING / LINHA DE USUÁRIO
+   ============================================================ */
+.linha-ranking {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid var(--borda);
+    margin-bottom: 10px;
+    background: var(--card-solid);
+    transition: all 0.25s ease;
+}
+
+.linha-ranking:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.linha-ranking .posicao {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.linha-ranking .info { flex: 1; min-width: 0; }
+
+.linha-ranking .nome {
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.linha-ranking .sub {
+    font-size: 12px;
+    color: var(--texto-sec);
+    font-weight: 500;
+}
+
+/* Pódio */
+.pos-ouro {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), var(--card-solid));
+    border-color: rgba(255, 184, 0, 0.4);
+}
+.pos-ouro .posicao { background: var(--grad-alegria); color: #6b4c00; }
+
+.pos-prata {
+    background: linear-gradient(90deg, rgba(203, 213, 225, 0.2), var(--card-solid));
+}
+.pos-prata .posicao { background: linear-gradient(135deg, #e2e8f0, #94a3b8); color: #1f2d3d; }
+
+.pos-bronze {
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.15), var(--card-solid));
+}
+.pos-bronze .posicao { background: linear-gradient(135deg, #d9a066, #a5642a); color: #fff; }
+
+
+/* ============================================================
+   16. CORUJA GUIA
+   ============================================================ */
+.coruja-guia {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--grad-alegria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(255, 184, 0, 0.5),
+                0 0 0 0 rgba(255, 204, 77, 0.7);
+    z-index: 999;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: coruja-pulsa 2s infinite;
+    border: 3px solid var(--card-solid);
+    user-select: none;
+}
+
+.coruja-guia:hover {
+    transform: scale(1.15) rotate(-8deg);
+}
+
+@keyframes coruja-pulsa {
+    0%, 100% {
+        box-shadow: 0 12px 32px rgba(255, 184, 0, 0.5),
+                    0 0 0 0 rgba(255, 204, 77, 0.7);
+    }
+    50% {
+        box-shadow: 0 12px 32px rgba(255, 184, 0, 0.6),
+                    0 0 0 14px rgba(255, 204, 77, 0);
+    }
+}
+
+.coruja-balao {
+    position: fixed;
+    bottom: 116px;
+    right: 24px;
+    max-width: 340px;
+    background: var(--card-solid);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: var(--shadow-lg);
+    z-index: 998;
+    display: none;
+    animation: balao-entra 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.coruja-balao.ativo { display: block; }
+
+.coruja-balao .btn,
+.coruja-balao .btn-secundario {
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+@keyframes balao-entra {
+    from { opacity: 0; transform: translateY(15px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* ============================================================
+   17. BANNER DE COOKIES
+   ============================================================ */
+.banner-cookies {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-solid);
+    padding: 16px 20px;
+    border-top: 1px solid var(--borda);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 1000;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.banner-cookies .btn {
+    width: 100%;
+}
+
+
+/* ============================================================
+   18. ALERTAS
+   ============================================================ */
+.alerta {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(59, 158, 255, 0.1);
+    border-left: 4px solid var(--primaria);
+    color: var(--texto);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.alerta-aviso {
+    background: rgba(255, 184, 0, 0.12);
+    border-left-color: var(--alegria-2);
+}
+
+.alerta-perigo {
+    background: rgba(255, 92, 122, 0.1);
+    border-left-color: var(--erro);
+}
+
+
+/* ============================================================
+   19. PILLS DE ESTATÍSTICAS
+   ============================================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.stat-pill {
+    background: var(--card-solid);
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    padding: 14px 16px;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.stat-pill:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primaria);
+}
+
+.stat-pill .valor {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    background: var(--grad-primario);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-pill .label {
+    font-size: 12px;
+    color: var(--texto-sec);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+}
+
+
+/* ============================================================
+   20. ANIMAÇÃO DE ENTRADA
+   ============================================================ */
+.fade-in {
+    animation: fade-in 0.5s ease both;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   21. SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--primaria);
+    border-radius: 10px;
+    border: 2px solid var(--bg-1);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primaria-escura); }
+
+
+/* ============================================================
+   22. RELÓGIO DO DASHBOARD
+   ============================================================ */
+.relogio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0;
+}
+
+.relogio {
+    font-family: 'Outfit', monospace;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.relogio-info {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--texto-sec);
+    letter-spacing: 0.02em;
+}
+
+
+/* ============================================================
+   23. GRID DOS DIAS DA SEMANA
+   ============================================================ */
+.dias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.dia-card {
+    position: relative;
+    background: var(--card-solid);
+    border: 2px solid var(--borda);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dia-card .dia-emoji {
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.dia-card .dia-nome {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.dia-card .dia-status {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--texto-sec);
+    margin-bottom: 4px;
+}
+
+.dia-card .dia-sub {
+    font-size: 11px;
+    color: var(--texto-sec);
+    opacity: 0.7;
+}
+
+/* Card de HOJE */
+.dia-card.hoje {
+    background: var(--grad-primario);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 10px 28px rgba(59, 158, 255, 0.4);
+    animation: card-hoje-pulsa 2s infinite;
+}
+
+.dia-card.hoje .dia-status,
+.dia-card.hoje .dia-sub {
+    color: #fff;
+    opacity: 0.95;
+}
+
+@keyframes card-hoje-pulsa {
+    0%, 100% { transform: scale(1); box-shadow: 0 10px 28px rgba(59, 158, 255, 0.4); }
+    50%      { transform: scale(1.03); box-shadow: 0 14px 32px rgba(59, 158, 255, 0.55); }
+}
+
+/* Card concluído */
+.dia-card.concluido {
+    background: linear-gradient(135deg, rgba(0, 214, 143, 0.15), rgba(0, 184, 124, 0.08));
+    border-color: var(--sucesso);
+}
+
+.dia-card.concluido .dia-status { color: var(--sucesso); }
+
+/* Card bloqueado */
+.dia-card.bloqueado {
+    opacity: 0.55;
+    background: rgba(148, 187, 233, 0.08);
+    cursor: not-allowed;
+}
+
+.dia-card.bloqueado .dia-emoji { filter: grayscale(1); }
+
+/* Card para PRÁTICA */
+.dia-card.pratica {
+    border-style: dashed;
+    border-color: var(--primaria);
+}
+
+.dia-card.pratica:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-style: solid;
+    box-shadow: 0 10px 24px rgba(59, 158, 255, 0.2);
+}
+
+/* Badge "+XP" no card do dia atual */
+.dia-card .dia-badge-xp {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--grad-alegria);
+    color: #6b4c00;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   24. BOTÃO FLUTUANTE VOLTAR AO DASHBOARD
+   ============================================================ */
+.btn-flutuante-dash {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--grad-primario);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    text-decoration: none;
+    box-shadow: 0 10px 28px rgba(59, 158, 255, 0.5);
+    z-index: 998;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 3px solid var(--card-solid);
+}
+
+.btn-flutuante-dash:hover {
+    transform: scale(1.12) rotate(-6deg);
+    box-shadow: 0 14px 32px rgba(59, 158, 255, 0.65);
+}
+
+
+/* ============================================================
+   25. BOTÃO DE ACESSIBILIDADE + PAINEL
+   ============================================================ */
+.btn-acessibilidade {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--grad-primario);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(59, 158, 255, 0.5);
+    z-index: 1500;
+    border: 3px solid var(--card-solid);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    user-select: none;
+}
+
+.btn-acessibilidade:hover { transform: scale(1.12) rotate(8deg); }
+.btn-acessibilidade:active { transform: scale(0.95); }
+
+.painel-acessibilidade {
+    position: fixed;
+    top: 90px;
+    right: 24px;
+    background: var(--card-solid);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 18px;
+    min-width: 260px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+    z-index: 1499;
+    display: none;
+    animation: painel-entra 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.painel-acessibilidade.aberto { display: block; }
+
+@keyframes painel-entra {
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.painel-acessibilidade h3 {
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--texto-sec);
+}
+
+.painel-acessibilidade .item-acess {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--bg-1);
+    margin-bottom: 8px;
+    border: 1px solid var(--borda);
+}
+
+.painel-acessibilidade .item-acess span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.painel-acessibilidade .item-acess button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    background: var(--grad-primario);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.painel-acessibilidade .item-acess button:hover { transform: scale(1.05); }
+
+.painel-acessibilidade .item-reset { margin-top: 4px; }
+
+.painel-acessibilidade .item-reset button {
+    width: 100%;
+    background: linear-gradient(135deg, #ff8a3d, #ff5c7a);
+    padding: 10px;
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   26. TELA DE CARREGAMENTO
+   ============================================================ */
+.tela-carregando {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-1);
+    background-image:
+        radial-gradient(at 30% 30%, rgba(59, 158, 255, 0.25) 0px, transparent 50%),
+        radial-gradient(at 70% 70%, rgba(255, 204, 77, 0.2) 0px, transparent 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2000;
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+}
+
+.tela-carregando.saindo { animation: fadeOut 0.4s forwards; }
+
+.tela-carregando .coruja-carregando {
+    font-size: 90px;
+    animation: coruja-pulinho 1s infinite ease-in-out;
+}
+
+.tela-carregando .texto-carregando {
+    margin-top: 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--texto);
+    letter-spacing: 0.02em;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.tela-carregando .pontinhos {
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.tela-carregando .pontinhos span {
+    display: inline-block;
+    animation: ponto-pula 1.4s infinite;
+}
+.tela-carregando .pontinhos span:nth-child(2) { animation-delay: 0.2s; }
+.tela-carregando .pontinhos span:nth-child(3) { animation-delay: 0.4s; }
+
+.tela-carregando .barra-carregando {
+    margin-top: 20px;
+    width: 240px;
+    height: 8px;
+    background: rgba(148, 187, 233, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tela-carregando .barra-carregando-preenchida {
+    height: 100%;
+    background: var(--grad-primario);
+    border-radius: 10px;
+    width: 0;
+    animation: barra-carrega 1.6s ease-out forwards;
+}
+
+@keyframes coruja-pulinho {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes ponto-pula {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30%           { transform: translateY(-6px); opacity: 1; }
+}
+
+@keyframes barra-carrega {
+    0%   { width: 0; }
+    60%  { width: 70%; }
+    100% { width: 100%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+
+/* ============================================================
+   27. CARD DE ATIVIDADE ÚNICA (fluxo)
+   ============================================================ */
+.atividade-container {
+    max-width: 720px;
+    margin: 0 auto;
+    animation: atividade-entra 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.atividade-container.saindo {
+    animation: atividade-sai 0.35s ease forwards;
+}
+
+@keyframes atividade-entra {
+    from { opacity: 0; transform: translateX(40px) scale(0.95); }
+    to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+@keyframes atividade-sai {
+    from { opacity: 1; transform: translateX(0)    scale(1); }
+    to   { opacity: 0; transform: translateX(-40px) scale(0.95); }
+}
+
+.progresso-atividades {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 4px;
+}
+
+.progresso-atividades .contador {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--texto-sec);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.progresso-atividades .barra-mini {
+    flex: 1;
+    margin: 0 16px;
+    height: 8px;
+    background: rgba(148, 187, 233, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-atividades .barra-mini-preenchida {
+    height: 100%;
+    background: var(--grad-primario);
+    border-radius: 10px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ============================================================
+   28. TELA FINAL DE PARABÉNS
+   ============================================================ */
+.tela-final {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-1);
+    background-image:
+        radial-gradient(at 20% 20%, rgba(0, 214, 143, 0.25) 0px, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(255, 204, 77, 0.3) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(139, 124, 246, 0.2) 0px, transparent 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    overflow-y: auto;
+}
+
+.tela-final .conteudo-final {
+    background: var(--card-solid);
+    border-radius: 28px;
+    padding: 40px 32px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    animation: final-entra 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes final-entra {
+    from { opacity: 0; transform: scale(0.85) translateY(30px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.tela-final .emoji-festa {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 8px;
+    animation: festa-gira 2s infinite ease-in-out;
+}
+
+@keyframes festa-gira {
+    0%, 100% { transform: rotate(-8deg) scale(1); }
+    50%      { transform: rotate(8deg)  scale(1.1); }
+}
+
+.tela-final h1 {
+    font-size: 2rem;
+    margin-bottom: 6px;
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tela-final p.subtitulo {
+    color: var(--texto-sec);
+    margin-bottom: 24px;
+}
+
+.tela-final .xp-ganho {
+    background: var(--grad-alegria);
+    color: #6b4c00;
+    font-family: 'Outfit', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    padding: 16px 24px;
+    border-radius: 20px;
+    margin: 16px 0;
+    box-shadow: 0 12px 30px rgba(255, 184, 0, 0.4);
+    display: inline-block;
+    animation: xp-pulsa 1.5s infinite;
+}
+
+@keyframes xp-pulsa {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+.tela-final .estatisticas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.tela-final .stat-item {
+    background: var(--bg-1);
+    border-radius: 16px;
+    padding: 14px 8px;
+    border: 1px solid var(--borda);
+}
+
+.tela-final .stat-item .valor {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primaria);
+    line-height: 1;
+}
+
+.tela-final .stat-item .rotulo {
+    font-size: 11px;
+    color: var(--texto-sec);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+}
+
+.tela-final .barra-progresso-final { margin: 20px 0; }
+
+.tela-final .acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* ============================================================
+   29. CONFETES
+   ============================================================ */
+.confete {
+    position: fixed;
+    width: 10px;
+    height: 14px;
+    top: -20px;
+    z-index: 2001;
+    animation: confete-cai linear forwards;
+    pointer-events: none;
+}
+
+@keyframes confete-cai {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+}
+
+
+/* ============================================================
+   30. CARDS DE CONTEÚDOS
+   ============================================================ */
+.conteudos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.conteudo-card {
+    display: block;
+    background: var(--card-solid);
+    border: 2px solid var(--borda);
+    border-radius: 14px;
+    padding: 16px;
+    text-decoration: none;
+    color: var(--texto);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.conteudo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primaria);
+    box-shadow: 0 10px 24px rgba(59, 158, 255, 0.2);
+    opacity: 1;
+}
+
+.conteudo-icone {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.conteudo-titulo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.conteudo-desc {
+    font-size: 12px;
+    color: var(--texto-sec);
+    line-height: 1.4;
+}
+
+
+/* ============================================================
+   31. MODAL DE EXPLICAÇÃO (quando erra)
+   ============================================================ */
+.modal-explicacao {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2500;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.modal-explicacao.saindo { animation: fadeOut 0.3s forwards; }
+
+.modal-conteudo {
+    background: var(--card-solid);
+    border-radius: 24px;
+    padding: 32px 28px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    animation: final-entra 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.explicacao-box {
+    background: linear-gradient(135deg, rgba(255, 204, 77, 0.15), rgba(59, 158, 255, 0.1));
+    border-left: 4px solid var(--alegria-2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   32. ANIMAÇÃO DE SUBIDA DE ESTÁGIO
+   ============================================================ */
+.tela-subiu-estagio {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffb800 0%, #ff5c7a 50%, #8b7cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+}
+
+.tela-subiu-estagio.saindo { animation: fadeOut 0.4s forwards; }
+
+.subiu-conteudo {
+    text-align: center;
+    animation: subiu-entra 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes subiu-entra {
+    0%   { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+    60%  { opacity: 1; transform: scale(1.15) rotate(5deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.subiu-raio {
+    font-size: 110px;
+    animation: raio-gira 1.5s infinite ease-in-out;
+}
+
+@keyframes raio-gira {
+    0%, 100% { transform: rotate(-12deg) scale(1); }
+    50%      { transform: rotate(12deg)  scale(1.15); }
+}
+
+.tela-subiu-estagio h1 {
+    color: #fff;
+    font-size: 2.4rem;
+    margin: 12px 0;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.02em;
+}
+
+.subiu-badge { margin-top: 12px; }
+
+
+/* ============================================================
+   33. FAÍSCAS AO ACERTAR
+   ============================================================ */
+.faisca {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3000;
+    animation: faisca-particula 0.9s ease-out forwards;
+}
+
+@keyframes faisca-particula {
+    0%   { transform: scale(0.5) translate(0, 0); opacity: 1; }
+    100% { transform: scale(1.2) translate(var(--fx), var(--fy)); opacity: 0; }
+}
+
+
+/* ============================================================
+   34. ZOOM AO GANHAR XP
+   ============================================================ */
+.zoom-xp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    font-family: 'Outfit', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--sucesso);
+    text-shadow: 0 6px 24px rgba(0, 214, 143, 0.6);
+    pointer-events: none;
+    z-index: 4000;
+    animation: zoom-xp-anima 1.1s ease-out forwards;
+}
+
+@keyframes zoom-xp-anima {
+    0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+    30%  { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+    70%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+    100% { transform: translate(-50%, -120%) scale(0.8); opacity: 0; }
+}
+
+
+/* ============================================================
+   35. TRANSIÇÃO EM BOLHA
+   ============================================================ */
+.bolha-transicao {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 5000;
+    animation: bolha-cresce 0.65s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+@keyframes bolha-cresce {
+    0%   { transform: translate(-50%, -50%) scale(0); }
+    100% { transform: translate(-50%, -50%) scale(30); }
+}
+
+
+/* ============================================================
+   36. TELA DE DESPEDIDA (Conta Deletada)
+   ============================================================ */
+.tela-despedida {
+    animation: despedida-entra 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes despedida-entra {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes flutuar-despedida {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-12px) rotate(3deg); }
+}
+
+
+/* ============================================================
+   37. TRANSIÇÃO SUAVE AO TROCAR TEMA/FONTE/CONTRASTE
+   ============================================================ */
+html, body, .card, .btn, .desafio-card, input, textarea, select {
+    transition: background-color 0.35s ease,
+                color 0.35s ease,
+                border-color 0.35s ease,
+                font-size 0.25s ease;
+}
+
+
+/* ============================================================
+   38. ALTO CONTRASTE
+   ============================================================ */
+[data-contraste="alto"] {
+    --bg-1: #000000;
+    --bg-2: #000000;
+    --card: #000000;
+    --card-solid: #0a0a0a;
+    --texto: #ffffff;
+    --texto-sec: #eeeeee;
+    --primaria: #ffd700;
+    --primaria-2: #ffea00;
+    --primaria-escura: #ffb800;
+    --borda: #ffd700;
+    --sucesso: #00ff9d;
+    --erro: #ff5c7a;
+    --alegria: #ffea00;
+    --alegria-2: #ffd700;
+}
+
+[data-contraste="alto"] .card,
+[data-contraste="alto"] .desafio-card {
+    border: 2px solid var(--primaria);
+}
+
+[data-contraste="alto"] .btn {
+    background: var(--primaria);
+    color: #000 !important;
+    font-weight: 900;
+}
+
+[data-contraste="alto"] .btn-secundario {
+    background: #000 !important;
+    color: var(--primaria) !important;
+    border: 2px solid var(--primaria);
+}
+
+[data-contraste="alto"] a {
+    color: var(--primaria) !important;
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   39. TAMANHOS DE FONTE
+   ============================================================ */
+[data-fonte="grande"]  { font-size: 118%; }
+[data-fonte="gigante"] { font-size: 138%; }
+
+
+/* ============================================================
+   40. TEMAS ADICIONAIS
+   ============================================================ */
+
+/* 🌸 Rosa suave */
+[data-tema="rosa"] {
+    --bg-1: #fdf2f8;
+    --bg-2: #fce7f3;
+    --card: rgba(255, 255, 255, 0.9);
+    --card-solid: #ffffff;
+    --texto: #4c1d3d;
+    --texto-sec: #9d5c8a;
+    --borda: rgba(244, 114, 182, 0.25);
+    --primaria: #ec4899;
+    --primaria-2: #f472b6;
+    --primaria-escura: #be185d;
+    --alegria: #fbbf24;
+    --sucesso: #10b981;
+}
+
+/* 🌿 Verde natural */
+[data-tema="verde"] {
+    --bg-1: #f0fdf4;
+    --bg-2: #dcfce7;
+    --card: rgba(255, 255, 255, 0.9);
+    --card-solid: #ffffff;
+    --texto: #14532d;
+    --texto-sec: #4d7c5f;
+    --borda: rgba(34, 197, 94, 0.25);
+    --primaria: #16a34a;
+    --primaria-2: #4ade80;
+    --primaria-escura: #15803d;
+    --alegria: #facc15;
+    --sucesso: #059669;
+}
+
+/* 🌊 Azul oceano */
+[data-tema="oceano"] {
+    --bg-1: #ecfeff;
+    --bg-2: #cffafe;
+    --card: rgba(255, 255, 255, 0.9);
+    --card-solid: #ffffff;
+    --texto: #083344;
+    --texto-sec: #0e7490;
+    --borda: rgba(6, 182, 212, 0.25);
+    --primaria: #0891b2;
+    --primaria-2: #22d3ee;
+    --primaria-escura: #0e7490;
+    --alegria: #fbbf24;
+    --sucesso: #10b981;
+}
+
+/* 🌙 Meia-noite */
+[data-tema="meianoite"] {
+    --bg-1: #050810;
+    --bg-2: #0a1424;
+    --card: rgba(15, 23, 42, 0.85);
+    --card-solid: #0f172a;
+    --texto: #e2e8f0;
+    --texto-sec: #94a3b8;
+    --borda: rgba(139, 92, 246, 0.2);
+    --primaria: #8b5cf6;
+    --primaria-2: #a78bfa;
+    --primaria-escura: #6d28d9;
+    --alegria: #fbbf24;
+    --sucesso: #10b981;
+}
+
+/* 🔥 Fogo */
+[data-tema="fogo"] {
+    --bg-1: #fff7ed;
+    --bg-2: #ffedd5;
+    --card: rgba(255, 255, 255, 0.9);
+    --card-solid: #ffffff;
+    --texto: #431407;
+    --texto-sec: #9a3412;
+    --borda: rgba(249, 115, 22, 0.25);
+    --primaria: #ea580c;
+    --primaria-2: #fb923c;
+    --primaria-escura: #c2410c;
+    --alegria: #facc15;
+    --sucesso: #10b981;
+}
+
+
+/* ============================================================
+   41. TEMA ESCURO — REFORÇO EM INPUTS
+   ============================================================ */
+[data-tema="escuro"] body {
+    background: var(--bg-1);
+    color: var(--texto);
+}
+
+[data-tema="escuro"] input,
+[data-tema="escuro"] textarea,
+[data-tema="escuro"] select {
+    background: #1a2533;
+    color: var(--texto);
+    border-color: var(--borda);
+}
+
+
+/* ============================================================
+   42. ACESSIBILIDADE — FOCO VISÍVEL
+   ============================================================ */
+*:focus-visible {
+    outline: 3px solid var(--primaria);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+
+/* ============================================================
+   📱 RESPONSIVIDADE
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   TABLETS (até 900px)
+   ------------------------------------------------------------ */
+@media (max-width: 900px) {
+    .container {
+        padding: 20px 16px 110px;
+    }
+
+    .card {
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .desafio-card {
+        padding: 22px;
+    }
+}
+
+/* ------------------------------------------------------------
+   CELULARES (até 700px)
+   ------------------------------------------------------------ */
+@media (max-width: 700px) {
+
+    /* Container e cards */
+    .container {
+        padding: 14px 12px 100px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 16px;
+        margin-bottom: 14px;
+    }
+
+    .desafio-card {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    /* Tipografia */
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1.05rem; }
+
+    /* Botões */
+    .btn {
+        padding: 12px 18px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+
+    /* Menu de navegação */
+    .menu-nav {
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .menu-nav .btn {
+        padding: 9px 14px;
+        font-size: 13px;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    /* Cabeçalho do usuário */
+    .header-usuario {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .header-usuario-info {
+        text-align: center;
+        min-width: 100%;
+    }
+
+    .header-usuario-info h2 { font-size: 1.25rem; }
+
+    .avatar-usuario {
+        width: 52px;
+        height: 66px;
+        font-size: 26px;
+    }
+
+    .header-ofensiva {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    /* Barra de XP */
+    .barra-xp-grande { height: 24px; }
+
+    .barra-xp-info {
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .barra-xp-info .xp-atual { font-size: 13px; }
+
+    /* Pills */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .stat-pill {
+        padding: 10px 8px;
+        border-radius: 12px;
+    }
+
+    .stat-pill .valor { font-size: 16px; }
+    .stat-pill .label { font-size: 10px; }
+
+    /* Grid dos dias */
+    .dias-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .dia-card {
+        padding: 12px 8px;
+        border-radius: 12px;
+    }
+
+    .dia-card .dia-emoji { font-size: 26px; margin-bottom: 4px; }
+    .dia-card .dia-nome { font-size: 13px; }
+    .dia-card .dia-status { font-size: 10px; }
+    .dia-card .dia-sub { font-size: 10px; }
+
+    /* Coruja */
+    .coruja-guia {
+        width: 58px;
+        height: 58px;
+        font-size: 30px;
+        bottom: 14px;
+        right: 14px;
+    }
+
+    .coruja-balao {
+        right: 12px;
+        left: 12px;
+        bottom: 88px;
+        max-width: none;
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    /* Botão flutuante dashboard */
+    .btn-flutuante-dash {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+        bottom: 14px;
+        left: 14px;
+    }
+
+    /* Botão de acessibilidade */
+    .btn-acessibilidade {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+        top: 14px;
+        right: 14px;
+    }
+
+    .painel-acessibilidade {
+        top: 70px;
+        right: 14px;
+        left: 14px;
+        min-width: auto;
+        padding: 16px;
+    }
+
+    /* Relógio */
+    .relogio { font-size: 2.4rem; }
+    .relogio-info { font-size: 12px; }
+
+    /* Opções de resposta */
+    .opcoes-resposta {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .opcao-btn {
+        padding: 14px 16px;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    /* V/F — 2 colunas no mobile */
+    .opcoes-vf {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .opcao-vf {
+        padding: 18px 12px !important;
+        font-size: 14px !important;
+    }
+
+    /* Associação — 1 coluna no mobile */
+    .opcoes-resposta.associacao {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    /* Tela de carregamento */
+    .tela-carregando .coruja-carregando { font-size: 70px; }
+    .tela-carregando .texto-carregando { font-size: 17px; }
+    .tela-carregando .barra-carregando { width: 200px; }
+
+    /* Tela final */
+    .tela-final { padding: 12px; }
+
+    .tela-final .conteudo-final {
+        padding: 28px 18px;
+        border-radius: 22px;
+    }
+
+    .tela-final .emoji-festa { font-size: 60px; }
+    .tela-final h1 { font-size: 1.5rem; }
+
+    .tela-final .xp-ganho {
+        font-size: 32px;
+        padding: 12px 20px;
+    }
+
+    .tela-final .estatisticas {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 18px 0;
+    }
+
+    .tela-final .stat-item { padding: 10px 4px; }
+    .tela-final .stat-item .valor { font-size: 16px; }
+    .tela-final .stat-item .rotulo { font-size: 9px; }
+
+    .tela-final .acoes {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tela-final .acoes .btn { width: 100%; }
+
+    /* Modal de explicação */
+    .modal-conteudo {
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    /* Tela de subir de estágio */
+    .tela-subiu-estagio h1 { font-size: 1.5rem; }
+    .subiu-raio { font-size: 80px; }
+
+    /* Progresso das atividades */
+    .progresso-atividades .contador { font-size: 12px; }
+    .progresso-atividades .barra-mini { margin: 0 10px; }
+
+    /* Ranking */
+    .linha-ranking {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .linha-ranking .posicao {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .linha-ranking .nome { font-size: 14px; }
+    .linha-ranking .sub { font-size: 11px; }
+
+    /* Conteúdos */
+    .conteudos-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* Inputs — evita zoom no iOS (precisa ser 16px) */
+    input, textarea, select {
+        font-size: 16px;
+        padding: 12px 14px;
+    }
+
+    /* Banner de cookies */
+    .banner-cookies {
+        flex-direction: column;
+        padding: 14px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .banner-cookies .btn { width: 100%; }
+}
+
+/* ------------------------------------------------------------
+   CELULARES PEQUENOS (até 380px)
+   ------------------------------------------------------------ */
+@media (max-width: 380px) {
+    h1 { font-size: 1.35rem; }
+    h2 { font-size: 1.1rem; }
+
+    .btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .menu-nav .btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .stat-pill .valor { font-size: 14px; }
+    .stat-pill .label { font-size: 9px; }
+
+    .dias-grid { grid-template-columns: 1fr; }
+
+    .coruja-guia {
+        width: 52px;
+        height: 52px;
+        font-size: 26px;
+    }
+
+    .tela-final .xp-ganho {
+        font-size: 28px;
+        padding: 10px 16px;
+    }
+}
+
+/* ------------------------------------------------------------
+   CELULAR DEITADO (landscape)
+   ------------------------------------------------------------ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .tela-final .conteudo-final {
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .tela-final .emoji-festa {
+        font-size: 44px;
+        margin-bottom: 4px;
+    }
+
+    .tela-final h1 { font-size: 1.3rem; }
+
+    .tela-final .xp-ganho {
+        font-size: 26px;
+        padding: 10px 16px;
+        margin: 10px 0;
+    }
+
+    .tela-final .estatisticas { margin: 14px 0; }
+
+    .tela-carregando .coruja-carregando { font-size: 60px; }
+
+    .coruja-guia {
+        width: 52px;
+        height: 60px;
+    }
+}
+
+/* ------------------------------------------------------------
+   TELA DE TOQUE — remove hover "grudento"
+   ------------------------------------------------------------ */
+@media (hover: none) {
+    .card:hover,
+    .desafio-card:hover,
+    .btn:hover {
+        transform: none;
+    }
+
+    /* Área de toque mínima recomendada */
+    .opcao-btn { min-height: 48px; }
+    .btn      { min-height: 44px; }
+}
+
+/* ============================================================
+   💬 MENSAGENS MOTIVACIONAIS (perto da coruja)
+   ============================================================ */
+.mensagem-motivacional {
+    position: fixed;
+    /* Fica na parte inferior direita, acima da coruja */
+    bottom: 200px;             /* acima da coruja e do balão */
+    right: 24px;
+    background: var(--grad-hero);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 32px rgba(59, 158, 255, 0.5);
+    z-index: 3500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+    animation: msg-entra 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    max-width: 260px;
+    white-space: nowrap;
+}
+
+.mensagem-motivacional.saindo {
+    animation: msg-sai 0.4s ease forwards;
+}
+
+.mensagem-motivacional .msg-emoji {
+    font-size: 20px;
+}
+
+/* Animação: cresce da direita (perto da coruja) */
+@keyframes msg-entra {
+    0%   { opacity: 0; transform: translateX(30px) scale(0.7); }
+    100% { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+@keyframes msg-sai {
+    0%   { opacity: 1; transform: translateX(0)     scale(1); }
+    100% { opacity: 0; transform: translateX(30px)  scale(0.9); }
+}
+
+/* No celular, fica um pouco menor ainda */
+@media (max-width: 700px) {
+    .mensagem-motivacional {
+        font-size: 12px;
+        padding: 10px 16px;
+        bottom: 180px;
+        right: 14px;
+        max-width: 220px;
+    }
+    .mensagem-motivacional .msg-emoji { font-size: 16px; }
+}
+
+/* ============================================================
+   🏆 CONQUISTAS NA TELA FINAL
+   ============================================================ */
+.conquistas-final {
+    margin: 20px 0;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255, 204, 77, 0.1), rgba(139, 124, 246, 0.08));
+    border-radius: 16px;
+    border: 1px solid var(--borda);
+}
+
+.conquistas-titulo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--texto-sec);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.conquistas-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.conquista-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-solid);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--texto);
+    border: 2px solid var(--alegria);
+    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.2);
+    animation: conquista-entra 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.conquista-icone { font-size: 18px; }
+
+@keyframes conquista-entra {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 700px) {
+    .conquista-item {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    .conquista-icone { font-size: 15px; }
+}
+
+
+/* 📊 Gráfico de XP */
+#grafico-xp {
+    max-height: 260px;
+}

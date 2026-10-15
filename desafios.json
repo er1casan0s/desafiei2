@@ -1,0 +1,385 @@
+{
+  "iniciante": {
+    "segunda": {
+      "titulo": "Segunda - Primeiros passos",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual palavra está escrita corretamente?", "opcoes": ["Caza", "Casa", "Kasa", "Cassa"], "resposta": "Casa", "xp": 15, "explicacao": "A forma correta é 'casa' com 's'. Escritas com 'z' ou 'k' estão erradas." },
+        { "materia": "Português", "pergunta": "Qual é o plural de 'flor'?", "opcoes": ["Flores", "Flors", "Florzes", "Floris"], "resposta": "Flores", "xp": 15, "explicacao": "Palavras terminadas em 'r' fazem plural com 'es': flor → flores." },
+        { "materia": "Português", "pergunta": "Como se escreve o número 7?", "opcoes": ["Sete", "Cete", "Sept", "Seth"], "resposta": "Sete", "xp": 15, "explicacao": "O número 7 se escreve 'sete', com 's' inicial." },
+        { "materia": "Português", "pergunta": "Quantas letras tem a palavra 'sol'?", "opcoes": ["2", "3", "4", "5"], "resposta": "3", "xp": 15, "explicacao": "A palavra 'sol' tem as letras S, O, L — total 3 letras." },
+        { "materia": "Português", "pergunta": "Qual é o feminino de 'menino'?", "opcoes": ["Menina", "Mení", "Menin", "Meninão"], "resposta": "Menina", "xp": 15, "explicacao": "O feminino de 'menino' é 'menina', trocando o 'o' por 'a'." },
+        { "materia": "Matemática", "pergunta": "Quanto é 2 + 3?", "opcoes": ["4", "5", "6", "7"], "resposta": "5", "xp": 15, "explicacao": "2 + 3 = 5. Somando 2 unidades com 3 unidades, temos 5." },
+        { "materia": "Matemática", "pergunta": "Quanto é 10 - 4?", "opcoes": ["5", "6", "7", "8"], "resposta": "6", "xp": 15, "explicacao": "10 - 4 = 6. Subtraindo 4 de 10, sobram 6." },
+        { "materia": "Matemática", "pergunta": "Quanto é 3 × 2?", "opcoes": ["5", "6", "7", "8"], "resposta": "6", "xp": 15, "explicacao": "3 × 2 = 6. Multiplicar é somar 3 duas vezes: 3 + 3 = 6." },
+        { "materia": "Matemática", "pergunta": "Quanto é 5 + 5?", "opcoes": ["8", "9", "10", "11"], "resposta": "10", "xp": 15, "explicacao": "5 + 5 = 10. É o dobro de 5." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é a cor do céu em dia limpo?", "opcoes": ["Verde", "Azul", "Vermelho", "Amarelo"], "resposta": "Azul", "xp": 15, "explicacao": "O céu é azul porque a luz do sol se espalha na atmosfera e o azul é a cor mais espalhada." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Casa' é um substantivo.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "'Casa' nomeia um objeto, então é substantivo." },
+        { "tipo": "vf", "materia": "Matemática", "pergunta": "5 + 5 é igual a 11.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "5 + 5 = 10, e não 11." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Eu ___ (estudar) todos os dias.", "opcoes": ["estudo", "estudar", "estudando", "estudarei"], "resposta": "estudo", "xp": 15, "explicacao": "Ação habitual no presente: eu estudo." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "10 - ___ = 4.", "opcoes": ["4", "5", "6", "7"], "resposta": "6", "xp": 15, "explicacao": "10 - 6 = 4." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual multiplicação dá 24?", "opcoes": ["6 × 4", "5 × 5", "7 × 3", "8 × 2"], "resposta": "6 × 4", "xp": 20, "explicacao": "6 × 4 = 24." }
+      ]
+    },
+    "terca": {
+      "titulo": "Terça - Reconhecendo palavras",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Quantas vogais tem a palavra 'escola'?", "opcoes": ["2", "3", "4", "5"], "resposta": "3", "xp": 15, "explicacao": "As vogais de 'escola' são E, O, A — 3 vogais." },
+        { "materia": "Português", "pergunta": "Qual dessas palavras é um animal?", "opcoes": ["Mesa", "Cadeira", "Cachorro", "Porta"], "resposta": "Cachorro", "xp": 15, "explicacao": "'Cachorro' é um animal. Mesa, cadeira e porta são objetos." },
+        { "materia": "Português", "pergunta": "Qual é o oposto de 'grande'?", "opcoes": ["Alto", "Pequeno", "Largo", "Grosso"], "resposta": "Pequeno", "xp": 15, "explicacao": "'Grande' e 'pequeno' são antônimos (opostos)." },
+        { "materia": "Português", "pergunta": "Como se escreve o número 10?", "opcoes": ["Dez", "Des", "Dezz", "Dês"], "resposta": "Dez", "xp": 15, "explicacao": "O número 10 se escreve 'dez', com 'z' no final." },
+        { "materia": "Português", "pergunta": "Qual dessas é uma cor?", "opcoes": ["Mesa", "Cadeira", "Verde", "Porta"], "resposta": "Verde", "xp": 15, "explicacao": "Verde é uma cor. Mesa, cadeira e porta são objetos." },
+        { "materia": "Matemática", "pergunta": "Quanto é 20 - 5?", "opcoes": ["10", "12", "15", "18"], "resposta": "15", "xp": 15, "explicacao": "20 - 5 = 15." },
+        { "materia": "Matemática", "pergunta": "Quantos lados tem um triângulo?", "opcoes": ["2", "3", "4", "5"], "resposta": "3", "xp": 15, "explicacao": "Triângulo tem 3 lados e 3 ângulos. O prefixo 'tri' significa três." },
+        { "materia": "Matemática", "pergunta": "Quanto é 4 + 4?", "opcoes": ["6", "7", "8", "9"], "resposta": "8", "xp": 15, "explicacao": "4 + 4 = 8. É o dobro de 4." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantos meses tem o ano?", "opcoes": ["10", "11", "12", "13"], "resposta": "12", "xp": 15, "explicacao": "O ano tem 12 meses, de janeiro a dezembro." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual animal faz 'miau'?", "opcoes": ["Cachorro", "Gato", "Vaca", "Cavalo"], "resposta": "Gato", "xp": 15, "explicacao": "O gato faz 'miau'. O cachorro faz 'au au', a vaca 'muu' e o cavalo 'iiirrr'." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Correr' é um verbo.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "'Correr' indica ação, então é verbo." },
+        { "tipo": "vf", "materia": "Conhecimentos Gerais", "pergunta": "O Sol é um planeta.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "O Sol é uma estrela, não um planeta." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Ela ___ (cantar) muito bem.", "opcoes": ["canta", "cantar", "cantando", "cantou"], "resposta": "canta", "xp": 15, "explicacao": "Ação habitual no presente: ela canta." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "20 ÷ 4 = ___.", "opcoes": ["3", "4", "5", "6"], "resposta": "5", "xp": 15, "explicacao": "20 ÷ 4 = 5." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual soma dá 100?", "opcoes": ["45 + 55", "40 + 50", "30 + 60", "20 + 70"], "resposta": "45 + 55", "xp": 20, "explicacao": "45 + 55 = 100." }
+      ]
+    },
+    "quarta": {
+      "titulo": "Quarta - Cores e objetos",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual é o plural de 'livro'?", "opcoes": ["Livros", "Livres", "Livra", "Livro"], "resposta": "Livros", "xp": 15, "explicacao": "Palavras terminadas em 'o' geralmente fazem plural com 's': livro → livros." },
+        { "materia": "Português", "pergunta": "Como se escreve a cor 'azul'?", "opcoes": ["Azul", "Asul", "Azull", "Azulh"], "resposta": "Azul", "xp": 15, "explicacao": "A grafia correta é 'azul', com 'z' e sem 'h'." },
+        { "materia": "Português", "pergunta": "Qual dessas é uma fruta?", "opcoes": ["Cadeira", "Banana", "Sapato", "Porta"], "resposta": "Banana", "xp": 15, "explicacao": "Banana é uma fruta. Os outros são objetos." },
+        { "materia": "Português", "pergunta": "Qual dessas é uma profissão?", "opcoes": ["Cadeira", "Médico", "Rua", "Céu"], "resposta": "Médico", "xp": 15, "explicacao": "Médico é uma profissão. Cadeira, rua e céu não são." },
+        { "materia": "Português", "pergunta": "Como se separa 'casa' em sílabas?", "opcoes": ["ca-sa", "cas-a", "c-as-a", "ca-s-a"], "resposta": "ca-sa", "xp": 15, "explicacao": "'Casa' tem duas sílabas: CA-SA. Cada sílaba precisa de pelo menos uma vogal." },
+        { "materia": "Matemática", "pergunta": "Quanto é 15 + 5?", "opcoes": ["18", "19", "20", "21"], "resposta": "20", "xp": 15, "explicacao": "15 + 5 = 20." },
+        { "materia": "Matemática", "pergunta": "Quanto é 6 ÷ 2?", "opcoes": ["2", "3", "4", "5"], "resposta": "3", "xp": 15, "explicacao": "6 ÷ 2 = 3. Dividir 6 em 2 partes iguais dá 3 em cada." },
+        { "materia": "Matemática", "pergunta": "Quanto é 7 + 3?", "opcoes": ["9", "10", "11", "12"], "resposta": "10", "xp": 15, "explicacao": "7 + 3 = 10. É o complemento para chegar a 10." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em que lugar cozinhamos?", "opcoes": ["Quarto", "Banheiro", "Cozinha", "Sala"], "resposta": "Cozinha", "xp": 15, "explicacao": "A cozinha é o cômodo da casa onde preparamos os alimentos." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantas horas tem um dia?", "opcoes": ["12", "20", "24", "30"], "resposta": "24", "xp": 15, "explicacao": "Um dia tem 24 horas — 12 horas de manhã/tarde e 12 horas de noite." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Rápido' é um advérbio.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "'Rápido' é um adjetivo. O advérbio seria 'rapidamente'." },
+        { "tipo": "vf", "materia": "Matemática", "pergunta": "Um triângulo tem 4 lados.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "Triângulo tem 3 lados. O que tem 4 é o quadrilátero." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Nós ___ (morar) em São Paulo.", "opcoes": ["moramos", "morar", "morando", "moram"], "resposta": "moramos", "xp": 15, "explicacao": "O verbo concorda com 'nós': moramos." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "7 × 8 = ___.", "opcoes": ["48", "54", "56", "64"], "resposta": "56", "xp": 15, "explicacao": "7 × 8 = 56." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual animal vive na água?", "opcoes": ["Peixe", "Leão", "Águia", "Girafa"], "resposta": "Peixe", "xp": 20, "explicacao": "O peixe vive na água." }
+      ]
+    },
+    "quinta": {
+      "titulo": "Quinta - Família e casa",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Quem é a mãe da sua mãe?", "opcoes": ["Tia", "Avó", "Irmã", "Prima"], "resposta": "Avó", "xp": 15, "explicacao": "A mãe da sua mãe é sua avó (avó materna)." },
+        { "materia": "Português", "pergunta": "Qual palavra é um verbo?", "opcoes": ["Casa", "Correr", "Bonito", "Rápido"], "resposta": "Correr", "xp": 15, "explicacao": "Verbo indica ação. 'Correr' é uma ação. Casa é substantivo; bonito é adjetivo; rápido é advérbio." },
+        { "materia": "Português", "pergunta": "Qual é o singular de 'flores'?", "opcoes": ["Flor", "Flore", "Flori", "Flores"], "resposta": "Flor", "xp": 15, "explicacao": "O singular de 'flores' é 'flor' — retirando o 'es' do plural." },
+        { "materia": "Português", "pergunta": "Qual dessas palavras é um substantivo?", "opcoes": ["Correr", "Bonito", "Cadeira", "Rapidamente"], "resposta": "Cadeira", "xp": 15, "explicacao": "Substantivo nomeia seres, objetos e lugares. 'Cadeira' é um objeto." },
+        { "materia": "Português", "pergunta": "Quantas sílabas tem 'borboleta'?", "opcoes": ["2", "3", "4", "5"], "resposta": "4", "xp": 15, "explicacao": "Bor-bo-le-ta — 4 sílabas." },
+        { "materia": "Matemática", "pergunta": "Quanto é 30 - 10?", "opcoes": ["10", "15", "20", "25"], "resposta": "20", "xp": 15, "explicacao": "30 - 10 = 20." },
+        { "materia": "Matemática", "pergunta": "Quanto é 5 × 5?", "opcoes": ["20", "22", "25", "30"], "resposta": "25", "xp": 15, "explicacao": "5 × 5 = 25. É o quadrado de 5." },
+        { "materia": "Matemática", "pergunta": "Quanto é 8 + 2?", "opcoes": ["9", "10", "11", "12"], "resposta": "10", "xp": 15, "explicacao": "8 + 2 = 10." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é a cor da banana madura?", "opcoes": ["Azul", "Vermelha", "Amarela", "Verde"], "resposta": "Amarela", "xp": 15, "explicacao": "A banana madura fica amarela. Quando verde, ainda está imatura." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantos minutos tem uma hora?", "opcoes": ["30", "45", "60", "90"], "resposta": "60", "xp": 15, "explicacao": "Uma hora tem 60 minutos." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Feliz' é um adjetivo.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "'Feliz' caracteriza alguém, então é adjetivo." },
+        { "tipo": "vf", "materia": "Conhecimentos Gerais", "pergunta": "Uma semana tem 7 dias.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "Uma semana tem 7 dias." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Ele ___ (chegar) ontem à noite.", "opcoes": ["chegou", "chega", "chegava", "chegando"], "resposta": "chegou", "xp": 15, "explicacao": "'Ontem' indica passado, então usamos 'chegou'." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "50 - 15 = ___.", "opcoes": ["30", "35", "40", "45"], "resposta": "35", "xp": 15, "explicacao": "50 - 15 = 35." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual multiplicação dá 36?", "opcoes": ["6 × 6", "5 × 7", "4 × 8", "3 × 11"], "resposta": "6 × 6", "xp": 20, "explicacao": "6 × 6 = 36." }
+      ]
+    },
+    "sexta": {
+      "titulo": "Sexta - Desafio turbinado",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual é o plural de 'animal'?", "opcoes": ["Animals", "Animais", "Animales", "Animaisz"], "resposta": "Animais", "xp": 15, "explicacao": "Palavras terminadas em 'l' fazem plural com 'is': animal → animais." },
+        { "materia": "Português", "pergunta": "Como se escreve a cor 'amarelo'?", "opcoes": ["Amarelo", "Amarellu", "Amarello", "Amarélo"], "resposta": "Amarelo", "xp": 15, "explicacao": "A grafia correta é 'amarelo', com apenas um 'l'." },
+        { "materia": "Português", "pergunta": "Qual é o plural de 'papel'?", "opcoes": ["Papéis", "Papels", "Papel", "Papéiz"], "resposta": "Papéis", "xp": 15, "explicacao": "Palavras terminadas em 'el' fazem plural com 'éis': papel → papéis." },
+        { "materia": "Português", "pergunta": "Qual é o feminino de 'ator'?", "opcoes": ["Atora", "Atriz", "Atoresa", "Atorinha"], "resposta": "Atriz", "xp": 15, "explicacao": "O feminino de 'ator' é 'atriz'. Muitas palavras em '-or' fazem feminino em '-iz'." },
+        { "materia": "Português", "pergunta": "Quantas vogais tem 'computador'?", "opcoes": ["3", "4", "5", "6"], "resposta": "4", "xp": 15, "explicacao": "Vogais em 'computador': O, U, A, O — 4 vogais." },
+        { "materia": "Português", "pergunta": "Qual é o oposto de 'feliz'?", "opcoes": ["Contente", "Triste", "Animado", "Alegre"], "resposta": "Triste", "xp": 15, "explicacao": "O oposto de 'feliz' é 'triste'. São antônimos." },
+        { "materia": "Matemática", "pergunta": "Quanto é 50 - 25?", "opcoes": ["15", "20", "25", "30"], "resposta": "25", "xp": 15, "explicacao": "50 - 25 = 25. É a metade de 50." },
+        { "materia": "Matemática", "pergunta": "Quanto é 2 × 8?", "opcoes": ["14", "16", "18", "20"], "resposta": "16", "xp": 15, "explicacao": "2 × 8 = 16. É o dobro de 8." },
+        { "materia": "Matemática", "pergunta": "Quanto é 100 + 50?", "opcoes": ["120", "140", "150", "160"], "resposta": "150", "xp": 15, "explicacao": "100 + 50 = 150." },
+        { "materia": "Matemática", "pergunta": "Quanto é 20 ÷ 4?", "opcoes": ["3", "4", "5", "6"], "resposta": "5", "xp": 15, "explicacao": "20 ÷ 4 = 5. Dividir 20 em 4 partes dá 5 em cada." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em que estação do ano faz mais calor?", "opcoes": ["Inverno", "Outono", "Verão", "Primavera"], "resposta": "Verão", "xp": 15, "explicacao": "O verão é a estação mais quente do ano." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantos dias tem um ano?", "opcoes": ["300", "350", "360", "365"], "resposta": "365", "xp": 15, "explicacao": "Um ano tem 365 dias (366 em anos bissextos)." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Rápido' é o feminino de 'rápida'.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "É o contrário: 'rápida' é o feminino de 'rápido'." },
+        { "tipo": "vf", "materia": "Conhecimentos Gerais", "pergunta": "O Brasil fica na América do Sul.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "O Brasil está na América do Sul." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "As flores ___ (ser) bonitas.", "opcoes": ["são", "ser", "sendo", "será"], "resposta": "são", "xp": 15, "explicacao": "Concorda com 'flores' (plural): são." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "9 × ___ = 81.", "opcoes": ["7", "8", "9", "10"], "resposta": "9", "xp": 15, "explicacao": "9 × 9 = 81." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual divisão dá 10?", "opcoes": ["100 ÷ 10", "80 ÷ 4", "60 ÷ 3", "50 ÷ 2"], "resposta": "100 ÷ 10", "xp": 20, "explicacao": "100 ÷ 10 = 10." }
+      ]
+    },
+    "sabado": {
+      "titulo": "Sábado - Revisão leve",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual palavra está no plural?", "opcoes": ["Casa", "Casas", "Casinha", "Casão"], "resposta": "Casas", "xp": 15, "explicacao": "'Casas' está no plural (mais de uma casa)." },
+        { "materia": "Português", "pergunta": "Qual dessas é uma fruta?", "opcoes": ["Mesa", "Maçã", "Cadeira", "Sapato"], "resposta": "Maçã", "xp": 15, "explicacao": "Maçã é uma fruta. Mesa, cadeira e sapato são objetos." },
+        { "materia": "Matemática", "pergunta": "Quanto é 9 + 1?", "opcoes": ["8", "9", "10", "11"], "resposta": "10", "xp": 15, "explicacao": "9 + 1 = 10." },
+        { "materia": "Matemática", "pergunta": "Quanto é 4 × 3?", "opcoes": ["10", "12", "14", "16"], "resposta": "12", "xp": 15, "explicacao": "4 × 3 = 12." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Onde vive o peixe?", "opcoes": ["No céu", "Na água", "No deserto", "Na montanha"], "resposta": "Na água", "xp": 15, "explicacao": "Os peixes vivem na água — doce ou salgada." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Correr' e 'pular' são verbos.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "Ambos indicam ações, então são verbos." },
+        { "tipo": "vf", "materia": "Matemática", "pergunta": "Todo número multiplicado por 1 é ele mesmo.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "Multiplicar por 1 não muda o valor." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Nós ___ (ir) ao parque amanhã.", "opcoes": ["iremos", "vamos", "fomos", "íamos"], "resposta": "iremos", "xp": 15, "explicacao": "'Amanhã' indica futuro: iremos." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "12 + ___ = 20.", "opcoes": ["6", "7", "8", "9"], "resposta": "8", "xp": 15, "explicacao": "12 + 8 = 20." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual é um meio de transporte?", "opcoes": ["Ônibus", "Cadeira", "Livro", "Sapato"], "resposta": "Ônibus", "xp": 20, "explicacao": "Ônibus é um meio de transporte." }
+      ]
+    },
+    "domingo": {
+      "titulo": "Domingo - Descanso ativo",
+      "dificuldade": 1,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual palavra começa com vogal?", "opcoes": ["Bola", "Casa", "Elefante", "Dado"], "resposta": "Elefante", "xp": 15, "explicacao": "'Elefante' começa com E, que é vogal." },
+        { "materia": "Português", "pergunta": "Quantas letras tem 'pato'?", "opcoes": ["3", "4", "5", "6"], "resposta": "4", "xp": 15, "explicacao": "A palavra 'pato' tem as letras P, A, T, O — 4 letras." },
+        { "materia": "Matemática", "pergunta": "Quanto é 100 - 50?", "opcoes": ["40", "45", "50", "55"], "resposta": "50", "xp": 15, "explicacao": "100 - 50 = 50. É a metade." },
+        { "materia": "Matemática", "pergunta": "Quanto é 10 ÷ 2?", "opcoes": ["2", "3", "4", "5"], "resposta": "5", "xp": 15, "explicacao": "10 ÷ 2 = 5." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é a cor do sol?", "opcoes": ["Azul", "Verde", "Amarelo", "Roxo"], "resposta": "Amarelo", "xp": 15, "explicacao": "O sol é amarelo (ou laranja em determinados momentos do dia)." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Mesa' começa com vogal.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Falso", "xp": 15, "explicacao": "'Mesa' começa com a consoante 'M'." },
+        { "tipo": "vf", "materia": "Matemática", "pergunta": "Zero é um número par.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 15, "explicacao": "Zero é considerado número par." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Eu ___ (ter) dois irmãos.", "opcoes": ["tenho", "ter", "tendo", "terei"], "resposta": "tenho", "xp": 15, "explicacao": "Presente do indicativo: eu tenho." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "15 ÷ 3 = ___.", "opcoes": ["3", "4", "5", "6"], "resposta": "5", "xp": 15, "explicacao": "15 ÷ 3 = 5." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual soma dá 50?", "opcoes": ["20 + 30", "15 + 30", "25 + 20", "10 + 45"], "resposta": "20 + 30", "xp": 20, "explicacao": "20 + 30 = 50." }
+      ]
+    }
+  },
+  "medio": {
+    "segunda": {
+      "titulo": "Segunda - Aquecendo a mente",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "O plural de 'cidadão' é:", "opcoes": ["Cidadãos", "Cidadões", "Cidadans", "Cidadão"], "resposta": "Cidadãos", "xp": 25, "explicacao": "Palavras terminadas em '-ão' podem ter plurais irregulares. 'Cidadão → cidadãos' é o mais comum." },
+        { "materia": "Português", "pergunta": "O plural de 'pão' é:", "opcoes": ["Pãos", "Pães", "Pans", "Pão"], "resposta": "Pães", "xp": 25, "explicacao": "O plural de 'pão' é 'pães', uma forma irregular." },
+        { "materia": "Português", "pergunta": "O plural de 'cão' é:", "opcoes": ["Cãos", "Cães", "Cans", "Cão"], "resposta": "Cães", "xp": 25, "explicacao": "O plural de 'cão' é 'cães', outra forma irregular." },
+        { "materia": "Português", "pergunta": "Qual é o feminino de 'ator'?", "opcoes": ["Atora", "Atriz", "Atoresa", "Atorinha"], "resposta": "Atriz", "xp": 25, "explicacao": "O feminino de 'ator' é 'atriz'." },
+        { "materia": "Português", "pergunta": "Qual palavra está escrita corretamente?", "opcoes": ["Excessão", "Exceção", "Esceção", "Excesão"], "resposta": "Exceção", "xp": 25, "explicacao": "'Exceção' é grafada com 'c' após 'e' — sem 'ss'." },
+        { "materia": "Matemática", "pergunta": "Quanto é 12 × 3?", "opcoes": ["32", "36", "38", "42"], "resposta": "36", "xp": 25, "explicacao": "12 × 3 = 36. 12 + 12 + 12 = 36." },
+        { "materia": "Matemática", "pergunta": "Quanto é 25% de 200?", "opcoes": ["25", "40", "50", "75"], "resposta": "50", "xp": 25, "explicacao": "25% de 200 = (25/100) × 200 = 50." },
+        { "materia": "Matemática", "pergunta": "Quanto é 144 ÷ 12?", "opcoes": ["10", "11", "12", "13"], "resposta": "12", "xp": 25, "explicacao": "144 ÷ 12 = 12, pois 12 × 12 = 144." },
+        { "materia": "Matemática", "pergunta": "Quanto é 15% de 300?", "opcoes": ["30", "40", "45", "50"], "resposta": "45", "xp": 25, "explicacao": "15% de 300 = (15/100) × 300 = 45." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantos estados tem o Brasil?", "opcoes": ["25", "26", "27", "28"], "resposta": "26", "xp": 25, "explicacao": "O Brasil tem 26 estados + o Distrito Federal." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Cidadãos' é o plural correto de 'cidadão'.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 25, "explicacao": "Cidadão → cidadãos." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Se eu ___ (poder), eu viajaria mais.", "opcoes": ["pudesse", "posso", "poderia", "podia"], "resposta": "pudesse", "xp": 25, "explicacao": "Hipótese no subjuntivo: se eu pudesse." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual fração representa 50%?", "opcoes": ["1/2", "1/3", "1/4", "2/5"], "resposta": "1/2", "xp": 30, "explicacao": "50% = 50/100 = 1/2." }
+      ]
+    },
+    "terca": {
+      "titulo": "Terça - Compreensão",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Em 'A menina correu rapidamente', qual é o verbo?", "opcoes": ["menina", "correu", "rapidamente", "a"], "resposta": "correu", "xp": 25, "explicacao": "'Correu' é o verbo (ação). 'Menina' é sujeito, 'rapidamente' é advérbio." },
+        { "materia": "Português", "pergunta": "Qual palavra é um adjetivo?", "opcoes": ["Casa", "Bonito", "Correr", "Rapidamente"], "resposta": "Bonito", "xp": 25, "explicacao": "Adjetivo caracteriza o substantivo. 'Bonito' é qualidade." },
+        { "materia": "Português", "pergunta": "Qual é o sinônimo de 'feliz'?", "opcoes": ["Triste", "Contente", "Zangado", "Cansado"], "resposta": "Contente", "xp": 25, "explicacao": "Sinônimo é palavra de mesmo sentido. 'Feliz' e 'contente' têm o mesmo sentido." },
+        { "materia": "Português", "pergunta": "Qual frase está no pretérito perfeito?", "opcoes": ["Eu estudo", "Eu estudarei", "Eu estudei", "Eu estudaria"], "resposta": "Eu estudei", "xp": 25, "explicacao": "'Estudei' está no pretérito perfeito — ação concluída no passado." },
+        { "materia": "Português", "pergunta": "Qual é o antônimo de 'claro'?", "opcoes": ["Brilhante", "Escuro", "Branco", "Luzente"], "resposta": "Escuro", "xp": 25, "explicacao": "Antônimo é o oposto. 'Claro' e 'escuro' são opostos." },
+        { "materia": "Matemática", "pergunta": "Resolva: 3² + 4² = ?", "opcoes": ["7", "12", "25", "49"], "resposta": "25", "xp": 25, "explicacao": "3² = 9 e 4² = 16. Somando: 9 + 16 = 25." },
+        { "materia": "Matemática", "pergunta": "Se 2x + 6 = 20, qual é x?", "opcoes": ["5", "6", "7", "8"], "resposta": "7", "xp": 25, "explicacao": "2x + 6 = 20 → 2x = 14 → x = 7." },
+        { "materia": "Matemática", "pergunta": "Quanto é 5³?", "opcoes": ["15", "25", "100", "125"], "resposta": "125", "xp": 25, "explicacao": "5³ = 5 × 5 × 5 = 125." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual planeta é o Planeta Vermelho?", "opcoes": ["Vênus", "Marte", "Júpiter", "Saturno"], "resposta": "Marte", "xp": 25, "explicacao": "Marte é vermelho por causa do óxido de ferro (ferrugem) em sua superfície." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em que ano o Brasil foi 'descoberto'?", "opcoes": ["1492", "1500", "1502", "1550"], "resposta": "1500", "xp": 25, "explicacao": "Em 22 de abril de 1500, Pedro Álvares Cabral chegou ao Brasil." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "Em 'Eu estudei', o verbo está no pretérito perfeito.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 25, "explicacao": "'Estudei' indica ação concluída no passado." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "25% de 200 é ___.", "opcoes": ["25", "40", "50", "75"], "resposta": "50", "xp": 25, "explicacao": "25% × 200 = 50." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual planeta é conhecido como Planeta Vermelho?", "opcoes": ["Marte", "Vênus", "Júpiter", "Saturno"], "resposta": "Marte", "xp": 30, "explicacao": "Marte é vermelho por causa do óxido de ferro." }
+      ]
+    },
+    "quarta": {
+      "titulo": "Quarta - Interpretação",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Quem escreveu Dom Casmurro?", "opcoes": ["Machado de Assis", "Monteiro Lobato", "Carlos Drummond", "Clarice Lispector"], "resposta": "Machado de Assis", "xp": 25, "explicacao": "Dom Casmurro (1899) é uma obra de Machado de Assis." },
+        { "materia": "Português", "pergunta": "Qual é o sujeito de 'O gato dorme'?", "opcoes": ["O", "gato", "dorme", "O gato"], "resposta": "O gato", "xp": 25, "explicacao": "Sujeito é quem pratica a ação. 'O gato' é quem dorme." },
+        { "materia": "Português", "pergunta": "Qual é o coletivo de 'peixes'?", "opcoes": ["Cardume", "Alcateia", "Enxame", "Manada"], "resposta": "Cardume", "xp": 25, "explicacao": "Cardume é o coletivo de peixes. Alcateia = lobos; enxame = abelhas; manada = bois/elefantes." },
+        { "materia": "Português", "pergunta": "O que é um 'substantivo próprio'?", "opcoes": ["Nome de coisa", "Nome de pessoa/lugar", "Nome de ação", "Nome de qualidade"], "resposta": "Nome de pessoa/lugar", "xp": 25, "explicacao": "Substantivo próprio é o nome específico de pessoa, lugar ou marca. Ex: Maria, Brasil." },
+        { "materia": "Português", "pergunta": "Qual é o tempo verbal de 'Eu cantarei'?", "opcoes": ["Presente", "Pretérito", "Futuro", "Imperativo"], "resposta": "Futuro", "xp": 25, "explicacao": "O verbo 'cantarei' está no futuro do presente — ação que ainda vai acontecer." },
+        { "materia": "Matemática", "pergunta": "A área de um quadrado de lado 9 cm é:", "opcoes": ["18 cm²", "36 cm²", "72 cm²", "81 cm²"], "resposta": "81 cm²", "xp": 25, "explicacao": "Área do quadrado = lado × lado = 9 × 9 = 81 cm²." },
+        { "materia": "Matemática", "pergunta": "Qual é a raiz quadrada de 81?", "opcoes": ["7", "8", "9", "10"], "resposta": "9", "xp": 25, "explicacao": "√81 = 9, porque 9 × 9 = 81." },
+        { "materia": "Matemática", "pergunta": "Quanto é 3/4 de 200?", "opcoes": ["120", "150", "160", "180"], "resposta": "150", "xp": 25, "explicacao": "3/4 de 200 = 200 ÷ 4 × 3 = 50 × 3 = 150." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é o maior bioma brasileiro?", "opcoes": ["Cerrado", "Amazônia", "Caatinga", "Pantanal"], "resposta": "Amazônia", "xp": 25, "explicacao": "A Amazônia é o maior bioma do Brasil, ocupando cerca de 49% do território." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem foi o primeiro presidente do Brasil?", "opcoes": ["Getúlio Vargas", "Deodoro da Fonseca", "Dom Pedro II", "Juscelino Kubitschek"], "resposta": "Deodoro da Fonseca", "xp": 25, "explicacao": "Deodoro da Fonseca proclamou a República em 1889 e foi o primeiro presidente (1889-1891)." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Dom Casmurro' foi escrito por Machado de Assis.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 25, "explicacao": "Publicado em 1899 por Machado de Assis." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "A raiz quadrada de 81 é ___.", "opcoes": ["7", "8", "9", "10"], "resposta": "9", "xp": 25, "explicacao": "√81 = 9." },
+        { "tipo": "associacao", "materia": "Português", "pergunta": "Qual é o coletivo de 'peixes'?", "opcoes": ["Cardume", "Alcateia", "Enxame", "Manada"], "resposta": "Cardume", "xp": 30, "explicacao": "Cardume é o coletivo de peixes." }
+      ]
+    },
+    "quinta": {
+      "titulo": "Quinta - Analisando",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Identifique a figura de linguagem: 'Seus olhos são dois oceanos'", "opcoes": ["Metáfora", "Metonímia", "Hipérbole", "Ironia"], "resposta": "Metáfora", "xp": 25, "explicacao": "Metáfora é uma comparação implícita, sem usar 'como'. Compara olhos a oceanos." },
+        { "materia": "Português", "pergunta": "O que é uma 'crase'?", "opcoes": ["Fusão de a+a", "Fusão de vogais", "Marca de plural", "Acento agudo"], "resposta": "Fusão de a+a", "xp": 25, "explicacao": "Crase é a fusão da preposição 'a' com o artigo 'a'. Ex: Vou à escola." },
+        { "materia": "Português", "pergunta": "Qual é o feminino de 'homem'?", "opcoes": ["Homenzinha", "Mulher", "Homena", "Homem-mulher"], "resposta": "Mulher", "xp": 25, "explicacao": "O feminino de 'homem' é 'mulher'. São palavras diferentes (heterônimos)." },
+        { "materia": "Português", "pergunta": "Quantas sílabas tem 'computador'?", "opcoes": ["3", "4", "5", "6"], "resposta": "4", "xp": 25, "explicacao": "Com-pu-ta-dor — 4 sílabas." },
+        { "materia": "Português", "pergunta": "Qual é o significado de 'efêmero'?", "opcoes": ["Eterno", "Passageiro", "Grande", "Raro"], "resposta": "Passageiro", "xp": 25, "explicacao": "Efêmero significa algo passageiro, que dura pouco tempo." },
+        { "materia": "Matemática", "pergunta": "Um produto custa R$80 com 15% de desconto. Preço final:", "opcoes": ["R$65", "R$68", "R$70", "R$72"], "resposta": "R$68", "xp": 25, "explicacao": "15% de 80 = 12. 80 - 12 = R$68." },
+        { "materia": "Matemática", "pergunta": "Quanto é 40% de 500?", "opcoes": ["150", "180", "200", "220"], "resposta": "200", "xp": 25, "explicacao": "40% de 500 = (40/100) × 500 = 200." },
+        { "materia": "Matemática", "pergunta": "Qual é o valor de 2⁶?", "opcoes": ["32", "48", "64", "128"], "resposta": "64", "xp": 25, "explicacao": "2⁶ = 2 × 2 × 2 × 2 × 2 × 2 = 64." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é a capital da França?", "opcoes": ["Londres", "Paris", "Berlim", "Roma"], "resposta": "Paris", "xp": 25, "explicacao": "Paris é a capital da França, maior cidade do país." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem pintou a Mona Lisa?", "opcoes": ["Michelangelo", "Van Gogh", "Leonardo da Vinci", "Picasso"], "resposta": "Leonardo da Vinci", "xp": 25, "explicacao": "A Mona Lisa foi pintada por Leonardo da Vinci no século XVI." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Seus olhos são dois oceanos' é um exemplo de metáfora.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 25, "explicacao": "Metáfora é comparação implícita, sem 'como'." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "Um produto de R$ 80 com 15% de desconto sai por R$ ___.", "opcoes": ["65", "68", "70", "72"], "resposta": "68", "xp": 25, "explicacao": "15% de 80 = 12. 80 - 12 = 68." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual é a capital da França?", "opcoes": ["Paris", "Londres", "Berlim", "Roma"], "resposta": "Paris", "xp": 30, "explicacao": "Paris é a capital da França." }
+      ]
+    },
+    "sexta": {
+      "titulo": "Sexta - Desafio turbinado",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Qual é o sujeito de 'Choveu muito ontem'?", "opcoes": ["Choveu", "muito", "ontem", "Inexistente"], "resposta": "Inexistente", "xp": 25, "explicacao": "O verbo 'chover' é impessoal — não tem sujeito." },
+        { "materia": "Português", "pergunta": "Qual é o tempo verbal de 'Eu cantarei'?", "opcoes": ["Presente", "Pretérito", "Futuro", "Imperativo"], "resposta": "Futuro", "xp": 25, "explicacao": "'Cantarei' está no futuro do presente." },
+        { "materia": "Português", "pergunta": "Qual palavra está correta?", "opcoes": ["Excessão", "Exceção", "Esceção", "Excesão"], "resposta": "Exceção", "xp": 25, "explicacao": "'Exceção' se escreve com 'c' (não 'ss')." },
+        { "materia": "Português", "pergunta": "O plural de 'cidadão' é:", "opcoes": ["Cidadãos", "Cidadões", "Cidadans", "Cidadão"], "resposta": "Cidadãos", "xp": 25, "explicacao": "O plural de 'cidadão' é 'cidadãos'." },
+        { "materia": "Português", "pergunta": "O que é uma 'crase'?", "opcoes": ["Fusão de a+a", "Fusão de vogais", "Marca de plural", "Acento agudo"], "resposta": "Fusão de a+a", "xp": 25, "explicacao": "Crase é a fusão de 'a' (preposição) + 'a' (artigo)." },
+        { "materia": "Português", "pergunta": "Qual é o antônimo de 'claro'?", "opcoes": ["Brilhante", "Escuro", "Branco", "Luzente"], "resposta": "Escuro", "xp": 25, "explicacao": "Antônimos de 'claro': escuro, opaco, obscuro." },
+        { "materia": "Matemática", "pergunta": "Se 3x - 5 = 10, x vale:", "opcoes": ["3", "4", "5", "6"], "resposta": "5", "xp": 25, "explicacao": "3x - 5 = 10 → 3x = 15 → x = 5." },
+        { "materia": "Matemática", "pergunta": "Quanto é 7 × 8?", "opcoes": ["48", "52", "56", "64"], "resposta": "56", "xp": 25, "explicacao": "7 × 8 = 56." },
+        { "materia": "Matemática", "pergunta": "Se um carro anda 60 km/h, em 3h ele anda:", "opcoes": ["120", "150", "180", "200"], "resposta": "180", "xp": 25, "explicacao": "Distância = velocidade × tempo = 60 × 3 = 180 km." },
+        { "materia": "Matemática", "pergunta": "Qual é a metade de 350?", "opcoes": ["125", "150", "175", "200"], "resposta": "175", "xp": 25, "explicacao": "350 ÷ 2 = 175." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Qual é o maior oceano do mundo?", "opcoes": ["Atlântico", "Índico", "Pacífico", "Ártico"], "resposta": "Pacífico", "xp": 25, "explicacao": "O Pacífico é o maior e mais profundo oceano do mundo." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em que continente fica o Egito?", "opcoes": ["Ásia", "África", "Europa", "Oceania"], "resposta": "África", "xp": 25, "explicacao": "O Egito fica no nordeste da África." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "O sujeito de 'Choveu ontem' é inexistente.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 25, "explicacao": "'Chover' é verbo impessoal — não tem sujeito." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "Se 3x - 5 = 10, então x = ___.", "opcoes": ["3", "4", "5", "6"], "resposta": "5", "xp": 25, "explicacao": "3x = 15 → x = 5." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual é o maior oceano do mundo?", "opcoes": ["Pacífico", "Atlântico", "Índico", "Ártico"], "resposta": "Pacífico", "xp": 30, "explicacao": "O Pacífico é o maior e mais profundo." }
+      ]
+    },
+    "sabado": {
+      "titulo": "Sábado - Avançando",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Na frase 'Ele disse que viria', a oração 'que viria' é:", "opcoes": ["Subordinada substantiva", "Subordinada adjetiva", "Coordenada", "Principal"], "resposta": "Subordinada substantiva", "xp": 25, "explicacao": "A oração 'que viria' completa o sentido do verbo 'disse' — é subordinada substantiva objetiva direta." },
+        { "materia": "Português", "pergunta": "Qual é o plural de 'cão'?", "opcoes": ["Cãos", "Cães", "Cans", "Cão"], "resposta": "Cães", "xp": 25, "explicacao": "'Cão → cães' é uma forma irregular de plural." },
+        { "materia": "Matemática", "pergunta": "Qual é o valor de 2⁶?", "opcoes": ["32", "48", "64", "128"], "resposta": "64", "xp": 25, "explicacao": "2⁶ = 64." },
+        { "materia": "Matemática", "pergunta": "Um triângulo tem ângulos 60° e 60°. O terceiro é:", "opcoes": ["30°", "45°", "60°", "90°"], "resposta": "60°", "xp": 25, "explicacao": "A soma dos ângulos internos de um triângulo é 180°. 180 - 60 - 60 = 60°." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem descobriu o Brasil?", "opcoes": ["Pedro Álvares Cabral", "Vasco da Gama", "Cristóvão Colombo", "Américo Vespúcio"], "resposta": "Pedro Álvares Cabral", "xp": 25, "explicacao": "Pedro Álvares Cabral chegou ao Brasil em 22 de abril de 1500." }
+      ]
+    },
+    "domingo": {
+      "titulo": "Domingo - Revisão geral",
+      "dificuldade": 2,
+      "atividades": [
+        { "materia": "Português", "pergunta": "O que é uma 'crase'?", "opcoes": ["Fusão de a+a", "Fusão de vogais", "Marca de plural", "Acento agudo"], "resposta": "Fusão de a+a", "xp": 25, "explicacao": "Crase é a fusão da preposição 'a' com o artigo 'a'." },
+        { "materia": "Português", "pergunta": "Qual é o feminino de 'homem'?", "opcoes": ["Mulher", "Homenzinha", "Homena", "Homem-mulher"], "resposta": "Mulher", "xp": 25, "explicacao": "O feminino de 'homem' é 'mulher'." },
+        { "materia": "Matemática", "pergunta": "Se 1 kg custa R$30, meio kg custa:", "opcoes": ["R$10", "R$15", "R$20", "R$25"], "resposta": "R$15", "xp": 25, "explicacao": "Metade de R$30 = R$15." },
+        { "materia": "Matemática", "pergunta": "Quanto é 9 × 9?", "opcoes": ["72", "81", "90", "99"], "resposta": "81", "xp": 25, "explicacao": "9 × 9 = 81." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quantos continentes existem?", "opcoes": ["5", "6", "7", "8"], "resposta": "6", "xp": 25, "explicacao": "Modelo brasileiro: 6 continentes (América, Europa, Ásia, África, Oceania, Antártida)." }
+      ]
+    }
+  },
+  "dificil": {
+    "segunda": {
+      "titulo": "Segunda - Desafio master",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Em 'Vossa Excelência', qual é a classificação?", "opcoes": ["Pronome de tratamento", "Substantivo próprio", "Adjetivo", "Verbo"], "resposta": "Pronome de tratamento", "xp": 40, "explicacao": "'Vossa Excelência' é pronome de tratamento usado para autoridades." },
+        { "materia": "Português", "pergunta": "O que é 'pleonasmo vicioso'?", "opcoes": ["Redundância desnecessária", "Figura poética", "Erro de ortografia", "Concordância verbal"], "resposta": "Redundância desnecessária", "xp": 40, "explicacao": "Pleonasmo vicioso é repetição desnecessária de ideia. Ex: 'subir para cima'." },
+        { "materia": "Português", "pergunta": "Em 'Havia muitos alunos', 'haver' é:", "opcoes": ["Verbo impessoal", "Verbo pessoal", "Verbo reflexivo", "Verbo auxiliar"], "resposta": "Verbo impessoal", "xp": 40, "explicacao": "'Haver' no sentido de existir é impessoal — fica sempre na 3ª pessoa do singular." },
+        { "materia": "Português", "pergunta": "Qual é o plural de 'cidadão'?", "opcoes": ["Cidadãos", "Cidadões", "Cidadans", "Cidadães"], "resposta": "Cidadãos", "xp": 40, "explicacao": "'Cidadão → cidadãos' é o plural correto segundo a norma padrão." },
+        { "materia": "Português", "pergunta": "O que é 'hipérbato'?", "opcoes": ["Inversão da ordem", "Exagero", "Suavização", "Repetição"], "resposta": "Inversão da ordem", "xp": 40, "explicacao": "Hipérbato é a inversão da ordem natural dos termos da oração." },
+        { "materia": "Matemática", "pergunta": "Resolva: log₁₀(1000)", "opcoes": ["2", "3", "10", "100"], "resposta": "3", "xp": 40, "explicacao": "log₁₀(1000) = 3, pois 10³ = 1000." },
+        { "materia": "Matemática", "pergunta": "Em x² - 5x + 6 = 0, x vale:", "opcoes": ["1 e 6", "2 e 3", "3 e 4", "5 e 6"], "resposta": "2 e 3", "xp": 40, "explicacao": "Δ = 25 - 24 = 1. x = (5 ± 1)/2 → x' = 3, x'' = 2." },
+        { "materia": "Matemática", "pergunta": "Derivada de f(x) = 3x²:", "opcoes": ["3x", "6x", "6", "3x³"], "resposta": "6x", "xp": 40, "explicacao": "A derivada de axⁿ é n·a·xⁿ⁻¹. Para 3x²: 2 × 3 × x¹ = 6x." },
+        { "materia": "Matemática", "pergunta": "Valor de √144:", "opcoes": ["10", "11", "12", "14"], "resposta": "12", "xp": 40, "explicacao": "√144 = 12, pois 12 × 12 = 144." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Autor de 'A Origem das Espécies':", "opcoes": ["Darwin", "Newton", "Einstein", "Galileu"], "resposta": "Darwin", "xp": 40, "explicacao": "Charles Darwin publicou 'A Origem das Espécies' em 1859, base da teoria da evolução." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Vossa Excelência' é um pronome de tratamento.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 40, "explicacao": "Usado para autoridades." },
+        { "tipo": "completar", "materia": "Português", "pergunta": "Em 'Se eu ___ rico, viajaria', o verbo correto é:", "opcoes": ["fosse", "era", "sou", "serei"], "resposta": "fosse", "xp": 40, "explicacao": "Pretérito imperfeito do subjuntivo: fosse." },
+        { "tipo": "associacao", "materia": "Matemática", "pergunta": "Qual é o valor de log₁₀(1000)?", "opcoes": ["2", "3", "10", "100"], "resposta": "3", "xp": 40, "explicacao": "10³ = 1000, então log₁₀(1000) = 3." }
+      ]
+    },
+    "terca": {
+      "titulo": "Terça - Reflexão",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Em 'Se eu fosse rico, viajaria', 'fosse' está:", "opcoes": ["Pretérito imperfeito do subjuntivo", "Presente do indicativo", "Futuro do presente", "Pretérito perfeito"], "resposta": "Pretérito imperfeito do subjuntivo", "xp": 40, "explicacao": "'Fosse' está no pretérito imperfeito do subjuntivo — indica hipótese." },
+        { "materia": "Português", "pergunta": "Figura de linguagem em 'Morri de rir':", "opcoes": ["Hipérbole", "Metáfora", "Ironia", "Eufemismo"], "resposta": "Hipérbole", "xp": 40, "explicacao": "Hipérbole é o exagero intencional. 'Morri de rir' não é literal." },
+        { "materia": "Português", "pergunta": "O que é 'anáfora'?", "opcoes": ["Repetição no início", "Omissão", "Exagero", "Ironia"], "resposta": "Repetição no início", "xp": 40, "explicacao": "Anáfora é a repetição de palavras no início de versos ou frases." },
+        { "materia": "Português", "pergunta": "O que é 'elipse'?", "opcoes": ["Omissão de termo", "Repetição", "Exagero", "Inversão"], "resposta": "Omissão de termo", "xp": 40, "explicacao": "Elipse é a omissão de um termo que se subentende. Ex: 'Bom dia' (omite 'eu desejo')." },
+        { "materia": "Português", "pergunta": "O que é 'concordância nominal'?", "opcoes": ["Verbo com sujeito", "Adjetivo com substantivo", "Sujeito com predicado", "Oração principal"], "resposta": "Adjetivo com substantivo", "xp": 40, "explicacao": "Concordância nominal é a harmonia entre adjetivo e substantivo. Ex: 'casas bonitas'." },
+        { "materia": "Matemática", "pergunta": "sen(30°) × 2 = ?", "opcoes": ["0,5", "1", "1,5", "2"], "resposta": "1", "xp": 40, "explicacao": "sen(30°) = 0,5. Logo, 0,5 × 2 = 1." },
+        { "materia": "Matemática", "pergunta": "Quanto é 5! (fatorial de 5)?", "opcoes": ["25", "60", "100", "120"], "resposta": "120", "xp": 40, "explicacao": "5! = 5 × 4 × 3 × 2 × 1 = 120." },
+        { "materia": "Matemática", "pergunta": "Soma dos ângulos internos de um hexágono:", "opcoes": ["360°", "540°", "720°", "900°"], "resposta": "720°", "xp": 40, "explicacao": "Fórmula: (n - 2) × 180°. Para n = 6: 4 × 180° = 720°." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "País mais populoso do mundo:", "opcoes": ["China", "Índia", "EUA", "Rússia"], "resposta": "Índia", "xp": 40, "explicacao": "Desde 2023, a Índia superou a China em população." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Menor país do mundo:", "opcoes": ["Mônaco", "Vaticano", "San Marino", "Liechtenstein"], "resposta": "Vaticano", "xp": 40, "explicacao": "O Vaticano é o menor país do mundo, com cerca de 0,44 km²." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "Em 'Havia muitos alunos', o verbo 'haver' é impessoal.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 40, "explicacao": "'Haver' no sentido de existir fica sempre na 3ª pessoa do singular." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "Em x² - 5x + 6 = 0, as raízes são:", "opcoes": ["1 e 6", "2 e 3", "3 e 4", "5 e 6"], "resposta": "2 e 3", "xp": 40, "explicacao": "Δ = 1. x = (5±1)/2 → 3 e 2." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Quem pintou 'Guernica'?", "opcoes": ["Picasso", "Dalí", "Miró", "Van Gogh"], "resposta": "Picasso", "xp": 40, "explicacao": "Pablo Picasso, 1937." }
+      ]
+    },
+    "quarta": {
+      "titulo": "Quarta - Aprofundando",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Oração subordinada adverbial causal indica:", "opcoes": ["Causa", "Tempo", "Condição", "Finalidade"], "resposta": "Causa", "xp": 40, "explicacao": "A oração causal indica o motivo da ação principal. Ex: 'Faltei porque fiquei doente'." },
+        { "materia": "Português", "pergunta": "Em 'Faz dez anos que parti', 'fazer' é:", "opcoes": ["Impessoal", "Pessoal", "Reflexivo", "Auxiliar"], "resposta": "Impessoal", "xp": 40, "explicacao": "'Fazer' indicando tempo decorrido é impessoal — fica na 3ª pessoa do singular." },
+        { "materia": "Português", "pergunta": "Em 'Bebi o copo todo', há figura:", "opcoes": ["Metonímia", "Metáfora", "Hipérbole", "Antítese"], "resposta": "Metonímia", "xp": 40, "explicacao": "Metonímia é o uso de uma palavra no lugar de outra relacionada. Bebeu o conteúdo (não o copo)." },
+        { "materia": "Português", "pergunta": "Aposto em 'Pedro, meu amigo, chegou':", "opcoes": ["Pedro", "meu amigo", "chegou", "Nenhum"], "resposta": "meu amigo", "xp": 40, "explicacao": "Aposto é o termo que explica ou especifica outro. 'Meu amigo' explica quem é Pedro." },
+        { "materia": "Português", "pergunta": "O que é 'anacoluto'?", "opcoes": ["Quebra de sintaxe", "Exagero", "Suavização", "Ironia"], "resposta": "Quebra de sintaxe", "xp": 40, "explicacao": "Anacoluto é uma quebra na estrutura sintática da frase. Ex: 'Eu, não me parece certo'." },
+        { "materia": "Matemática", "pergunta": "Valor de 2⁸:", "opcoes": ["128", "256", "512", "1024"], "resposta": "256", "xp": 40, "explicacao": "2⁸ = 256." },
+        { "materia": "Matemática", "pergunta": "Raiz cúbica de 27:", "opcoes": ["2", "3", "4", "9"], "resposta": "3", "xp": 40, "explicacao": "∛27 = 3, pois 3 × 3 × 3 = 27." },
+        { "materia": "Matemática", "pergunta": "Fórmula da área do círculo:", "opcoes": ["2πr", "πr²", "πd", "2πr²"], "resposta": "πr²", "xp": 40, "explicacao": "A área do círculo é π × raio². Já 2πr é o perímetro (circunferência)." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em que ano caiu o Muro de Berlim?", "opcoes": ["1969", "1979", "1989", "1999"], "resposta": "1989", "xp": 40, "explicacao": "O Muro de Berlim caiu em 9 de novembro de 1989." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem pintou 'Guernica'?", "opcoes": ["Dalí", "Picasso", "Miró", "Van Gogh"], "resposta": "Picasso", "xp": 40, "explicacao": "'Guernica' (1937) é uma obra de Pablo Picasso retratando os horrores da guerra." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "'Bebi o copo todo' é um exemplo de metonímia.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 40, "explicacao": "Metonímia: bebeu o conteúdo (não o copo)." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "2⁸ é igual a ___.", "opcoes": ["128", "256", "512", "1024"], "resposta": "256", "xp": 40, "explicacao": "2⁸ = 256." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Em que ano caiu o Muro de Berlim?", "opcoes": ["1989", "1969", "1979", "1999"], "resposta": "1989", "xp": 40, "explicacao": "9 de novembro de 1989." }
+      ]
+    },
+    "quinta": {
+      "titulo": "Quinta - Raciocínio avançado",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Função sintática de 'com os amigos' em 'Saí com os amigos':", "opcoes": ["Objeto indireto", "Adjunto adverbial", "Complemento nominal", "Aposto"], "resposta": "Adjunto adverbial", "xp": 40, "explicacao": "'Com os amigos' é adjunto adverbial de companhia — indica circunstância." },
+        { "materia": "Português", "pergunta": "Em 'Convém que estudes', o 'que' introduz:", "opcoes": ["Oração subordinada substantiva", "Oração adjetiva", "Conjunção coordenativa", "Pronome relativo"], "resposta": "Oração subordinada substantiva", "xp": 40, "explicacao": "O 'que' introduz uma oração que funciona como sujeito do verbo 'convém'." },
+        { "materia": "Português", "pergunta": "Em 'Fui eu que fiz', o 'que' é:", "opcoes": ["Pronome relativo", "Conjunção integrante", "Preposição", "Advérbio"], "resposta": "Pronome relativo", "xp": 40, "explicacao": "'Que' retoma 'eu' e introduz oração adjetiva — é pronome relativo." },
+        { "materia": "Português", "pergunta": "Vício de linguagem em 'Fazem dois anos':", "opcoes": ["Barbarismo", "Solecismo", "Pleonasmo", "Ambiguidade"], "resposta": "Solecismo", "xp": 40, "explicacao": "Solecismo é erro de sintaxe. 'Fazer' indicando tempo é impessoal — não flexiona." },
+        { "materia": "Português", "pergunta": "O que é 'eufemismo'?", "opcoes": ["Suavização", "Exagero", "Inversão", "Repetição"], "resposta": "Suavização", "xp": 40, "explicacao": "Eufemismo é suavizar uma ideia dura. Ex: 'Ele nos deixou' em vez de 'morreu'." },
+        { "materia": "Matemática", "pergunta": "Fórmula de Bhaskara:", "opcoes": ["(-b ± √Δ)/2a", "a²+b²", "πr²", "2πr"], "resposta": "(-b ± √Δ)/2a", "xp": 40, "explicacao": "Bhaskara: x = (-b ± √Δ) / 2a, onde Δ = b² - 4ac." },
+        { "materia": "Matemática", "pergunta": "Quanto é 2⁰ + 3⁰?", "opcoes": ["0", "1", "2", "5"], "resposta": "2", "xp": 40, "explicacao": "Todo número elevado a 0 é 1. Logo, 1 + 1 = 2." },
+        { "materia": "Matemática", "pergunta": "Valor aproximado de π:", "opcoes": ["2,14", "3,14", "4,14", "5,14"], "resposta": "3,14", "xp": 40, "explicacao": "π ≈ 3,14159... Usamos 3,14 em cálculos aproximados." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Desenvolveu a teoria da relatividade:", "opcoes": ["Newton", "Einstein", "Galileu", "Hawking"], "resposta": "Einstein", "xp": 40, "explicacao": "Albert Einstein desenvolveu a teoria da relatividade (especial em 1905, geral em 1915)." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Capital da Austrália:", "opcoes": ["Sydney", "Melbourne", "Canberra", "Perth"], "resposta": "Canberra", "xp": 40, "explicacao": "A capital da Austrália é Canberra (não Sydney, que é a maior cidade)." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "Em 'Faz dez anos que parti', o verbo 'fazer' é impessoal.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 40, "explicacao": "Indicando tempo, fica na 3ª pessoa do singular." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "A fórmula de Bhaskara é x = ___", "opcoes": ["(-b ± √Δ)/2a", "a² + b²", "πr²", "2πr"], "resposta": "(-b ± √Δ)/2a", "xp": 40, "explicacao": "Com Δ = b² - 4ac." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Quem desenvolveu a teoria da relatividade?", "opcoes": ["Einstein", "Newton", "Galileu", "Hawking"], "resposta": "Einstein", "xp": 40, "explicacao": "Albert Einstein, 1905/1915." }
+      ]
+    },
+    "sexta": {
+      "titulo": "Sexta - Desafio turbinado",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Sujeito de 'Fazem dois anos que ele partiu':", "opcoes": ["Fazem", "dois anos", "ele", "Inexistente"], "resposta": "Inexistente", "xp": 40, "explicacao": "O verbo 'fazer' indicando tempo é impessoal — a frase não tem sujeito." },
+        { "materia": "Português", "pergunta": "Em 'Prefiro ler a assistir TV', há:", "opcoes": ["Regência correta", "Erro de crase", "Pleonasmo", "Ambiguidade"], "resposta": "Regência correta", "xp": 40, "explicacao": "O verbo 'preferir' pede 'a' (não 'do que'). A construção está correta." },
+        { "materia": "Português", "pergunta": "O que é 'zeugma'?", "opcoes": ["Omissão de termo já citado", "Repetição", "Exagero", "Inversão"], "resposta": "Omissão de termo já citado", "xp": 40, "explicacao": "Zeugma é a omissão de um termo já mencionado. Ex: 'Eu prefiro ler; ela, escrever'." },
+        { "materia": "Português", "pergunta": "Em 'Ele é forte como um touro', há:", "opcoes": ["Comparação", "Metáfora", "Metonímia", "Ironia"], "resposta": "Comparação", "xp": 40, "explicacao": "Uso de 'como' caracteriza comparação (símile), diferente da metáfora." },
+        { "materia": "Português", "pergunta": "O que é 'prosopopeia'?", "opcoes": ["Atribuir voz a seres inanimados", "Exagero", "Omissão", "Inversão"], "resposta": "Atribuir voz a seres inanimados", "xp": 40, "explicacao": "Prosopopeia (personificação) dá características humanas a seres inanimados." },
+        { "materia": "Português", "pergunta": "Em 'Tudo isto me causa dor', a classe de 'isto' é:", "opcoes": ["Pronome demonstrativo", "Pronome pessoal", "Substantivo", "Adjetivo"], "resposta": "Pronome demonstrativo", "xp": 40, "explicacao": "'Isto' é pronome demonstrativo — indica algo próximo de quem fala." },
+        { "materia": "Matemática", "pergunta": "sen(90°) =", "opcoes": ["0", "0,5", "1", "-1"], "resposta": "1", "xp": 40, "explicacao": "sen(90°) = 1. É o valor máximo da função seno." },
+        { "materia": "Matemática", "pergunta": "cos(0°) =", "opcoes": ["0", "0,5", "1", "-1"], "resposta": "1", "xp": 40, "explicacao": "cos(0°) = 1. É o valor máximo da função cosseno." },
+        { "materia": "Matemática", "pergunta": "tg(45°) =", "opcoes": ["0", "0,5", "1", "√3"], "resposta": "1", "xp": 40, "explicacao": "tg(45°) = 1, pois sen(45°) = cos(45°)." },
+        { "materia": "Matemática", "pergunta": "10! / (8! × 2!) =", "opcoes": ["30", "36", "45", "90"], "resposta": "45", "xp": 40, "explicacao": "10!/(8!·2!) = (10×9)/(2×1) = 90/2 = 45." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Em qual país surgiu a filosofia?", "opcoes": ["Roma", "Grécia", "Egito", "China"], "resposta": "Grécia", "xp": 40, "explicacao": "A filosofia ocidental surgiu na Grécia Antiga (séc. VI a.C.), com Tales de Mileto." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Moeda oficial do Japão:", "opcoes": ["Won", "Yuan", "Iene", "Dólar"], "resposta": "Iene", "xp": 40, "explicacao": "A moeda do Japão é o iene (¥)." },
+        { "tipo": "vf", "materia": "Português", "pergunta": "Em 'Prefiro ler a assistir TV', a regência está correta.", "opcoes": ["Verdadeiro", "Falso"], "resposta": "Verdadeiro", "xp": 40, "explicacao": "'Preferir' pede 'a', não 'do que'." },
+        { "tipo": "completar", "materia": "Matemática", "pergunta": "5! (fatorial de 5) é igual a ___.", "opcoes": ["25", "60", "100", "120"], "resposta": "120", "xp": 40, "explicacao": "5! = 5×4×3×2×1 = 120." },
+        { "tipo": "associacao", "materia": "Conhecimentos Gerais", "pergunta": "Qual é a moeda oficial do Japão?", "opcoes": ["Iene", "Won", "Yuan", "Dólar"], "resposta": "Iene", "xp": 40, "explicacao": "O iene (¥) é a moeda japonesa." }
+      ]
+    },
+    "sabado": {
+      "titulo": "Sábado - Elite do conhecimento",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Em 'Se soubesse, teria vindo', há:", "opcoes": ["Oração condicional", "Oração causal", "Oração final", "Oração temporal"], "resposta": "Oração condicional", "xp": 40, "explicacao": "'Se soubesse' indica condição. É oração subordinada adverbial condicional." },
+        { "materia": "Português", "pergunta": "O que é 'hipérbole'?", "opcoes": ["Exagero", "Suavização", "Inversão", "Omissão"], "resposta": "Exagero", "xp": 40, "explicacao": "Hipérbole é exagero intencional. Ex: 'Chorei rios de lágrimas'." },
+        { "materia": "Matemática", "pergunta": "Em uma PG de razão 2, se a₁=1, a₄ é:", "opcoes": ["6", "8", "12", "16"], "resposta": "8", "xp": 40, "explicacao": "PG: aₙ = a₁ · qⁿ⁻¹. a₄ = 1 × 2³ = 8." },
+        { "materia": "Matemática", "pergunta": "Se log₂(x) = 5, x é:", "opcoes": ["10", "16", "25", "32"], "resposta": "32", "xp": 40, "explicacao": "log₂(x) = 5 → x = 2⁵ = 32." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem foi Nelson Mandela?", "opcoes": ["Presidente dos EUA", "Líder sul-africano", "Rei da Inglaterra", "Imperador do Japão"], "resposta": "Líder sul-africano", "xp": 40, "explicacao": "Nelson Mandela foi líder antiapartheid e presidente da África do Sul (1994-1999)." }
+      ]
+    },
+    "domingo": {
+      "titulo": "Domingo - Desafio final",
+      "dificuldade": 3,
+      "atividades": [
+        { "materia": "Português", "pergunta": "Em 'Fui eu que fiz', 'que' é:", "opcoes": ["Pronome relativo", "Conjunção", "Preposição", "Advérbio"], "resposta": "Pronome relativo", "xp": 40, "explicacao": "'Que' retoma 'eu' — é pronome relativo." },
+        { "materia": "Português", "pergunta": "Em 'Fazem dois anos', há:", "opcoes": ["Barbarismo", "Solecismo", "Pleonasmo", "Ambiguidade"], "resposta": "Solecismo", "xp": 40, "explicacao": "Erro de concordância do verbo impessoal 'fazer'." },
+        { "materia": "Matemática", "pergunta": "Soma dos 10 primeiros naturais:", "opcoes": ["45", "50", "55", "60"], "resposta": "55", "xp": 40, "explicacao": "1+2+...+10 = 55. Fórmula: n(n+1)/2 = 10 × 11 / 2 = 55." },
+        { "materia": "Matemática", "pergunta": "√144 =", "opcoes": ["10", "11", "12", "14"], "resposta": "12", "xp": 40, "explicacao": "√144 = 12, pois 12 × 12 = 144." },
+        { "materia": "Conhecimentos Gerais", "pergunta": "Quem escreveu '1984'?", "opcoes": ["George Orwell", "Aldous Huxley", "Ray Bradbury", "Kafka"], "resposta": "George Orwell", "xp": 40, "explicacao": "George Orwell publicou '1984' em 1949, uma distopia sobre vigilância total." }
+      ]
+    }
+  }
+}

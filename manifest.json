@@ -1,0 +1,26 @@
+{
+    "name": "Desafiei — Desafios Diários EJA",
+    "short_name": "Desafiei",
+    "description": "Aprenda com desafios diários de Português, Matemática e Conhecimentos Gerais.",
+    "start_url": "/dashboard",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#eef5ff",
+    "theme_color": "#3b9eff",
+    "lang": "pt-BR",
+    "icons": [
+        {
+            "src": "/static/img/coruja-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/img/coruja-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

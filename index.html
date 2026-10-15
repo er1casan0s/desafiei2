@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-tema="claro">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#3b9eff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Desafiei">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/img/coruja-192.png">
+<link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>🦉 Desafiei — Desafios Diários para EJA</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width:480px;margin-top:60px">
+
+        <!-- HERO LOGO -->
+        <div class="card fade-in" style="text-align:center;padding:36px 24px">
+            <div style="font-size:72px;line-height:1;margin-bottom:8px">🦉</div>
+            <h1 style="background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px">
+                Desafiei
+            </h1>
+            <p style="color:var(--texto-sec);font-weight:500">
+                Desafios diários para EJA • Aprenda, jogue e evolua
+            </p>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="card fade-in" style="animation-delay:0.1s">
+            <h2 style="margin-bottom:20px">Entrar</h2>
+                        <p style="color:var(--texto-sec);font-size:13px;margin-bottom:16px">
+                💡 Administradores são redirecionados automaticamente ao painel.
+            </p>
+            <form onsubmit="fazerLogin(event)">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="voce@email.com" required>
+
+                <label>Senha</label>
+                <input type="password" name="senha" placeholder="••••••••" required>
+
+                <button class="btn" type="submit" style="width:100%;margin-top:8px">
+                    Entrar →
+                </button>
+            </form>
+
+            <p style="margin-top:18px;text-align:center;color:var(--texto-sec);font-size:14px">
+                Não tem conta?
+                <a href="/cadastro" style="font-weight:700">Cadastre-se grátis</a>
+            </p>
+        </div>
+
+                <!-- ACESSIBILIDADE -->
+        <div class="card fade-in" style="animation-delay:0.2s;text-align:center;padding:18px">
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+                <button class="btn btn-secundario" id="btn-tema"      onclick="alternarTema()"     title="Alternar tema claro/escuro">🌙 Escuro</button>
+                <button class="btn btn-secundario" id="btn-fonte"     onclick="ciclarFonte()"      title="Aumentar tamanho da fonte">🔤 Fonte A</button>
+                <button class="btn btn-secundario" id="btn-contraste" onclick="ciclarContraste()"  title="Alternar alto contraste">🔲 Contraste: Normal</button>
+                <button class="btn btn-secundario"                    onclick="resetarAcessibilidade()" title="Voltar tudo ao padrão">↺ Resetar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner de cookies -->
+    <div class="banner-cookies" id="banner-cookies" style="display:none">
+        <span style="font-weight:600">🍪 Usamos cookies para melhorar sua experiência.</span>
+        <a href="#" onclick="verPolitica(event)" style="font-weight:700">Política de Privacidade</a>
+        <button class="btn" onclick="aceitarCookies()">Aceitar</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script>
+        if (!localStorage.getItem("desafiei_cookies")) {
+            document.getElementById("banner-cookies").style.display = "flex";
+        }
+        function aceitarCookies() {
+            localStorage.setItem("desafiei_cookies", "1");
+            document.getElementById("banner-cookies").style.display = "none";
+        }
+        async function verPolitica(e) {
+            e.preventDefault();
+            const r = await fetch("/api/politica-privacidade");
+            const j = await r.json();
+            alert(j.titulo + "\n\n" + j.texto);
+        }
+    </script>
+
+        <!-- Coruja guia -->
+    <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+
+
+<script>
+// 🌍 Registra o Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("🌍 Service Worker ativado"))
+            .catch(err => console.warn("Erro no SW:", err));
+    });
+}
+
+// 🔔 Pede permissão para notificações (uma vez)
+if ("Notification" in window && Notification.permission === "default") {
+    // Espera o usuário interagir com a página primeiro (melhor UX)
+    document.body.addEventListener("click", async () => {
+        if (Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+    }, { once: true });
+}
+</script>
+     <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>
+</body>
+</html>

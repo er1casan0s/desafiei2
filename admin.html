@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>🛡️ Painel Admin • Desafiei</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+        <div class="card fade-in" style="background:var(--grad-hero);color:#fff;border:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+                <div>
+                    <h1 style="color:#fff;margin-bottom:4px">🛡️ Painel de Administrador</h1>
+                    <p style="opacity:0.9">Bem-vindo(a), admin! Aqui você controla tudo do Desafiei.</p>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="btn btn-alegria" onclick="exportarBackup()">📥 Backup</button>
+                    <a href="/dashboard" class="btn btn-secundario">🏠 Ver site</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTATÍSTICAS GERAIS -->
+        <div class="admin-stats" id="admin-stats"></div>
+
+        <!-- ABAS -->
+        <div class="card fade-in" style="padding:8px">
+            <div class="admin-tabs">
+                <button class="admin-tab ativo" onclick="mudarAba('usuarios', this)">👥 Usuários</button>
+                <button class="admin-tab"       onclick="mudarAba('deletados', this)">🗑️ Deletados</button>
+                <button class="admin-tab"       onclick="mudarAba('materias', this)">📚 Matérias</button>
+            </div>
+        </div>
+
+        <!-- ABA: USUÁRIOS -->
+        <div id="aba-usuarios" class="aba-conteudo">
+            <div class="card fade-in">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+                    <h2>👥 Todos os usuários</h2>
+                    <input type="text" id="busca-usuario" placeholder="🔍 Buscar por nome ou email..."
+                           oninput="filtrarUsuarios()" style="max-width:300px">
+                </div>
+                <div id="lista-usuarios"></div>
+            </div>
+        </div>
+
+        <!-- ABA: DELETADOS -->
+        <div id="aba-deletados" class="aba-conteudo" style="display:none">
+            <div class="card fade-in">
+                <h2 style="margin-bottom:16px">🗑️ Contas deletadas</h2>
+                <p style="color:var(--texto-sec);font-size:14px;margin-bottom:16px">
+                    Histórico de contas que foram deletadas pelos próprios alunos.
+                </p>
+                <div id="lista-deletados"></div>
+            </div>
+        </div>
+
+        <!-- ABA: MATÉRIAS -->
+        <div id="aba-materias" class="aba-conteudo" style="display:none">
+            <div class="card fade-in">
+                <h2 style="margin-bottom:16px">📚 Desempenho por matéria</h2>
+                <canvas id="grafico-materias" height="280"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETALHES DO USUÁRIO -->
+    <div class="modal-admin" id="modal-usuario">
+        <div class="modal-admin-conteudo">
+            <button class="modal-fechar" onclick="fecharModal()">✕</button>
+            <div id="detalhes-usuario"></div>
+        </div>
+    </div>
+
+    <!-- Coruja guia -->
+    <div class="coruja-guia" id="coruja-guia">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
