@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
- <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
-<meta name="theme-color" content="#3b9eff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Desafiei">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="/static/img/coruja-192.png">
-<link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- ============================================================
+         META TAGS BÁSICAS
+         ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
 
-    <title>Perfil • Desafiei</title>
+    <!-- ============================================================
+         META TAGS PWA (Progressive Web App)
+         Faz o site funcionar como app instalável no celular
+         ============================================================ -->
+    <meta name="theme-color" content="#3b9eff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Desafiei">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/static/img/coruja-192.png">
+
+    <!-- ============================================================
+         FAVICON E CSS
+         ============================================================ -->
     <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Perfil • Desafiei</title>
 </head>
 <body>
     <div class="container" style="max-width:560px">
 
         <!-- ============================================================
-             CARD DO PERFIL (avatar + nome + XP + estágio + ofensiva)
-             Preenchido dinamicamente pelo JS abaixo
+             CARD DO PERFIL
+             Mostra avatar, nome, idade, email, XP, estágio e ofensiva.
+             O conteúdo é preenchido pelo JavaScript (fetch /api/meu-perfil)
              ============================================================ -->
         <div class="card fade-in" style="text-align:center">
             <h1>👤 Meu Perfil</h1>
@@ -29,8 +40,19 @@
         </div>
 
         <!-- ============================================================
+             GRÁFICO DE XP
+             Mostra o XP ganho nos últimos 30 dias em forma de linha
+             Usa a biblioteca Chart.js
+             ============================================================ -->
+        <div class="card fade-in">
+            <h3>📊 Seu progresso (últimos 30 dias)</h3>
+            <canvas id="grafico-xp" height="220"></canvas>
+        </div>
+
+        <!-- ============================================================
              TROCAR FOTO DE PERFIL
-             O input dispara converterFotoPerfil() que converte para base64
+             O input file dispara converterFotoPerfil() que converte a imagem
+             para base64 e envia ao servidor
              ============================================================ -->
         <div class="card fade-in">
             <h3>📷 Trocar foto de perfil</h3>
@@ -45,7 +67,8 @@
 
         <!-- ============================================================
              TROCAR AVATAR EMOJI
-             Se o aluno escolher um emoji, a foto é removida
+             Se o aluno escolher um emoji, a foto antiga é removida
+             automaticamente pelo backend
              ============================================================ -->
         <div class="card fade-in">
             <h3>😊 Trocar avatar emoji</h3>
@@ -58,13 +81,14 @@
                 <option value="🦁">🦁 Leão</option>
                 <option value="🐸">🐸 Sapo</option>
                 <option value="🐨">🐨 Coala</option>
+                <option value="🦋">🦋 Borboleta</option>
             </select>
             <button class="btn" onclick="trocarEmoji()" style="width:100%">Salvar avatar</button>
         </div>
 
         <!-- ============================================================
              SAIR DA CONTA
-             Redireciona para /logout (rota já existente no app.py)
+             Único lugar com a função "sair" (evita duplicatas)
              ============================================================ -->
         <div class="card fade-in">
             <h3>🚪 Sair da conta</h3>
@@ -78,6 +102,8 @@
 
         <!-- ============================================================
              ZONA DE RISCO (deletar conta)
+             Apaga a conta permanentemente. Antes de deletar, o aluno
+             precisa confirmar 2 vezes (com aviso sensível)
              ============================================================ -->
         <div class="card fade-in" style="border:2px solid var(--erro)">
             <h3 style="color:var(--erro)">⚠️ Zona de risco</h3>
@@ -87,14 +113,18 @@
             </button>
         </div>
 
-        <!-- Botão voltar (redundante com o flutuante, mas útil) -->
+        <!-- ============================================================
+             BOTÃO VOLTAR AO DASHBOARD
+             (além do botão flutuante no canto inferior esquerdo)
+             ============================================================ -->
         <div class="card fade-in" style="text-align:center">
             <a href="#" onclick="event.preventDefault(); transicaoBolha('/dashboard')" class="btn btn-secundario">⬅️ Voltar</a>
         </div>
     </div>
 
     <!-- ============================================================
-         CORUJA GUIA (fixa no canto)
+         CORUJA GUIA (fixa no canto inferior direito)
+         Abre o tutorial ao clicar
          ============================================================ -->
     <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
     <div class="coruja-balao" id="coruja-balao"></div>
@@ -110,21 +140,19 @@
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
     <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <script>
         // ============================================================
-        // Variável global que guarda a foto (em base64) escolhida
+        // 1) CARREGAR E EXIBIR O PERFIL
         // ============================================================
-        let fotoBase64 = "";
+        // Busca os dados do usuário logado e monta o card do perfil
+        // Se o usuário tem foto, mostra a foto. Senão, mostra o emoji.
+        // ============================================================
+        let fotoBase64 = "";    // Guarda a foto escolhida (base64)
 
-        // ============================================================
-        // Carrega os dados do perfil e monta o HTML do card
-        // ============================================================
         fetch("/api/meu-perfil").then(r => r.json()).then(u => {
-
             // ----- Monta o avatar (foto OU emoji) -----
-            // Se o usuário tem foto, mostra a foto em formato oval.
-            // Se não, mostra o emoji escolhido dentro de um círculo.
             const avatarHTML = u.foto
                 ? `<img src="${u.foto}" alt="Foto de perfil" style="
                         width: 110px;
@@ -163,8 +191,10 @@
         });
 
         // ============================================================
-        // Converte a imagem escolhida para base64
-        // (para poder enviar via JSON ao servidor)
+        // 2) CONVERTER FOTO PARA BASE64
+        // ============================================================
+        // O input <input type="file"> não envia direto pelo JSON.
+        // Então usamos FileReader para transformar em base64.
         // ============================================================
         function converterFotoPerfil(input) {
             const file = input.files[0];
@@ -172,14 +202,14 @@
 
             const reader = new FileReader();
             reader.onload = e => {
-                fotoBase64 = e.target.result;
+                fotoBase64 = e.target.result;   // "data:image/png;base64,..."
                 alert("✅ Foto carregada! Clique em 'Salvar foto' para confirmar.");
             };
             reader.readAsDataURL(file);
         }
 
         // ============================================================
-        // Envia a foto (base64) para o servidor
+        // 3) SALVAR FOTO NO SERVIDOR
         // ============================================================
         async function salvarFoto() {
             if (!fotoBase64) {
@@ -197,10 +227,11 @@
             location.reload();
         }
 
-
-        
         // ============================================================
-        // Troca o avatar emoji (e limpa a foto antiga)
+        // 4) TROCAR AVATAR EMOJI
+        // ============================================================
+        // Ao escolher um emoji, o backend limpa a foto antiga
+        // automaticamente (envia foto="")
         // ============================================================
         async function trocarEmoji() {
             const emoji = document.getElementById("novo-emoji").value;
@@ -214,30 +245,26 @@
             alert("✅ Avatar atualizado!");
             location.reload();
         }
-    </script>
 
-        
-
-                <!-- 📊 Gráfico de XP -->
-        <div class="card fade-in">
-            <h3>📊 Seu progresso (últimos 30 dias)</h3>
-            <canvas id="grafico-xp" height="220"></canvas>
-        </div>
-
-        <!-- Chart.js CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-        <script>
+        // ============================================================
+        // 5) GRÁFICO DE XP (Chart.js)
+        // ============================================================
+        // Busca o histórico de XP dos últimos 30 dias e desenha
+        // uma linha com gradiente azul
+        // ============================================================
         document.addEventListener("DOMContentLoaded", async () => {
             try {
                 const resp = await fetch("/api/historico-xp");
                 const dados = await resp.json();
 
+                // Se não tem dados, mostra mensagem
                 if (!dados.dias || dados.dias.length === 0) {
                     document.getElementById("grafico-xp").parentElement.innerHTML +=
                         '<p style="text-align:center;color:var(--texto-sec)">Sem dados ainda. Faça desafios para ver seu progresso!</p>';
                     return;
                 }
 
+                // Cria gradiente azul do topo (mais forte) para baixo (transparente)
                 const ctx = document.getElementById("grafico-xp").getContext("2d");
                 const gradiente = ctx.createLinearGradient(0, 0, 0, 220);
                 gradiente.addColorStop(0, "rgba(59, 158, 255, 0.4)");
@@ -246,6 +273,7 @@
                 new Chart(ctx, {
                     type: "line",
                     data: {
+                        // Converte "2026-10-15" em "15/10"
                         labels: dados.dias.map(d => {
                             const [a, m, dia] = d.split("-");
                             return `${dia}/${m}`;
@@ -257,7 +285,7 @@
                             backgroundColor: gradiente,
                             borderWidth: 3,
                             fill: true,
-                            tension: 0.4,
+                            tension: 0.4,             // linha curva suave
                             pointBackgroundColor: "#3b9eff",
                             pointBorderColor: "#fff",
                             pointBorderWidth: 2,
@@ -295,28 +323,29 @@
                 console.warn("Erro ao gerar gráfico:", e);
             }
         });
-        </script>
 
-        <script>
-// 🌍 Registra o Service Worker
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js")
-            .then(() => console.log("🌍 Service Worker ativado"))
-            .catch(err => console.warn("Erro no SW:", err));
-    });
-}
-
-// 🔔 Pede permissão para notificações (uma vez)
-if ("Notification" in window && Notification.permission === "default") {
-    // Espera o usuário interagir com a página primeiro (melhor UX)
-    document.body.addEventListener("click", async () => {
-        if (Notification.permission === "default") {
-            await Notification.requestPermission();
+        // ============================================================
+        // 6) SERVICE WORKER (PWA / Modo offline)
+        // ============================================================
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/sw.js")
+                    .then(() => console.log("🌍 Service Worker ativado"))
+                    .catch(err => console.warn("Erro no SW:", err));
+            });
         }
-    }, { once: true });
-}
-</script>
 
+        // ============================================================
+        // 7) NOTIFICAÇÕES (pede permissão apenas 1x)
+        // ============================================================
+        if ("Notification" in window && Notification.permission === "default") {
+            // Só pede permissão DEPOIS que o usuário clicar em algo
+            document.body.addEventListener("click", async () => {
+                if (Notification.permission === "default") {
+                    await Notification.requestPermission();
+                }
+            }, { once: true });
+        }
+    </script>
 </body>
 </html>

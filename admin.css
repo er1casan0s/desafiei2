@@ -402,3 +402,36 @@
     border-radius: 999px;
     letter-spacing: 0.05em;
 }
+
+/* ============================================================
+   📊 GRÁFICO DE MATÉRIAS — CONTAINER COM ALTURA FIXA
+   ============================================================ */
+
+/* Wrapper que impede o gráfico de esticar até o infinito */
+.grafico-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 700px;      /* Limita a largura máxima */
+    height: 320px;          /* 🔥 ALTURA FIXA — o gráfico respeita isso */
+    margin: 0 auto;         /* Centraliza horizontalmente */
+    padding: 10px 0;
+}
+
+/* Garante que o canvas respeite o wrapper */
+.grafico-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 320px;
+    display: block;
+}
+
+/* No celular, fica um pouco mais baixo */
+@media (max-width: 700px) {
+    .grafico-wrapper {
+        height: 260px;
+        padding: 8px 0;
+    }
+    .grafico-wrapper canvas {
+        max-height: 260px;
+    }
+}

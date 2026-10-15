@@ -75,7 +75,12 @@ function fecharTutorial() {
     const balao = document.getElementById("coruja-balao");
     if (balao) balao.classList.remove("ativo");
     tutorialAberto = false;
+
+    // Salva no localStorage (cache local)
     localStorage.setItem("desafiei_tutorial_visto", "1");
+
+    // 🦉 Também avisa o servidor (para valer entre dispositivos)
+    fetch("/api/tutorial-visto", { method: "POST" }).catch(() => {});
 }
 
 function proximoPasso() {
@@ -182,12 +187,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     const balao = document.getElementById("coruja-balao");
     if (!coruja || !balao) return;
 
+    // Clique na coruja
     coruja.addEventListener("click", (e) => {
         e.stopPropagation();
         if (tutorialAberto) fecharTutorial();
         else iniciarTutorial();
     });
 
+    // Clique fora
     document.addEventListener("click", (e) => {
         if (!tutorialAberto) return;
         if (!balao.contains(e.target) && !coruja.contains(e.target)) {
@@ -195,11 +202,27 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    // ESC
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && tutorialAberto) fecharTutorial();
     });
 
-    if (!localStorage.getItem("desafiei_tutorial_visto")) {
-        setTimeout(iniciarTutorial, 1200);
+    // 🦉 ABRIR AUTOMATICAMENTE SE FOR 1º ACESSO
+    try {
+        const perfil = await fetch("/api/meu-perfil").then(r => r.json());
+
+        // Abre o tutorial se:
+        //   • for o primeiro acesso real (backend mandou mostrar_tutorial=true)
+        //   • E o localStorage não tiver sido marcado nesta máquina
+        if (perfil.mostrar_tutorial === true) {
+            // Limpa qualquer flag local antiga
+            localStorage.removeItem("desafiei_tutorial_visto");
+            setTimeout(iniciarTutorial, 1500);
+        } else if (!localStorage.getItem("desafiei_tutorial_visto") && !perfil.mostrar_tutorial) {
+            // Usuário já usou o site, não mostra o tutorial
+            localStorage.setItem("desafiei_tutorial_visto", "1");
+        }
+    } catch (e) {
+        console.warn("Erro ao verificar tutorial:", e);
     }
 });

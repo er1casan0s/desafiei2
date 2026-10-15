@@ -12,6 +12,10 @@ import secrets
 import random
 from datetime import datetime, date, timedelta
 from collections import defaultdict
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)
@@ -24,7 +28,7 @@ ARQ_USUARIOS            = "usuarios.json"
 ARQ_DESAFIOS            = "desafios.json"
 ARQ_GRUPOS              = "grupos.json"
 ARQ_HISTORICO_DELETADOS = "historico_deletados.json"
-
+ARQ_TOKENS              = "tokens_recuperacao.json"   
 
 # ============================================================
 # LISTA DE DIAS DA SEMANA
@@ -49,6 +53,24 @@ def admin_required():
     """Verifica se o usuário logado é admin."""
     email = session.get("usuario_email")
     return email and eh_admin(email)
+
+
+
+
+# ============================================================
+# 📧 CONFIGURAÇÃO DE EMAIL (recuperação de senha)
+# ============================================================
+# ⚠️ IMPORTANTE: use uma "Senha de App" do Gmail, não a senha normal.
+
+# Como gerar: https://myaccount.google.com/apppasswords: nqqv mzok kmhl totd
+EMAIL_REMETENTE = "erica.santos.lima15@gmail.com"
+EMAIL_SENHA     = "nqqv mzok kmhl totd"   # 👈 COLE A SENHA DE APP AQUI
+EMAIL_SMTP      = "smtp.gmail.com"
+EMAIL_PORTA     = 587
+
+# URL base do site (para montar o link no email)
+URL_BASE = "http://127.0.0.1:5000"
+
 
 
 # ============================================================
@@ -298,6 +320,199 @@ def manifest():
     """Serve o manifest do PWA na raiz."""
     return app.send_static_file("manifest.json")
 
+@app.route("/esqueci-senha")
+def esqueci_senha():
+    """Página para solicitar recuperação de senha."""
+    return render_template("esqueci_senha.html")
+
+
+
+@app.route("/redefinir-senha/<token>")
+def redefinir_senha(token):
+    """Página para redefinir a senha (recebe token por URL)."""
+    # Valida o token
+    tokens = ler_json(ARQ_TOKENS)
+    info = tokens.get(token)
+
+    if not info:
+        return render_template("redefinir_senha.html", token=token, valido=False, motivo="Link inválido")
+
+    # Verifica expiração (30 minutos)
+    try:
+        criado = datetime.fromisoformat(info["criado_em"])
+        if (datetime.now() - criado).total_seconds() > 30 * 60:
+            # Remove token expirado
+            tokens.pop(token, None)
+            gravar_json(ARQ_TOKENS, tokens)
+            return render_template("redefinir_senha.html", token=token, valido=False, motivo="Link expirado")
+    except:
+        return render_template("redefinir_senha.html", token=token, valido=False, motivo="Link inválido")
+
+    return render_template("redefinir_senha.html", token=token, valido=True, motivo="")
+
+
+# ============================================================
+# 📧 API: ENVIAR EMAIL DE RECUPERAÇÃO
+# ============================================================
+@app.route("/api/esqueci-senha", methods=["POST"])
+def api_esqueci_senha():
+    """
+    Recebe o email, gera um token e envia link de recuperação.
+    """
+    dados = request.json or {}
+    email = (dados.get("email") or "").strip().lower()
+
+    if not email:
+        return jsonify({"erro": "Email é obrigatório"}), 400
+
+    usuarios = ler_json(ARQ_USUARIOS)
+    if email not in usuarios:
+        # 🛡️ Por segurança, não revela se o email existe ou não
+        return jsonify({
+            "ok": True,
+            "mensagem": "Se o email existir, enviaremos um link de recuperação."
+        })
+
+    # Gera token único
+    token = secrets.token_urlsafe(32)
+
+    # Salva o token com validade de 30 minutos
+    tokens = ler_json(ARQ_TOKENS)
+    tokens[token] = {
+        "email":      email,
+        "criado_em":  datetime.now().isoformat(),
+    }
+
+    # Limpa tokens antigos (> 1 hora)
+    for t, info in list(tokens.items()):
+        try:
+            criado = datetime.fromisoformat(info["criado_em"])
+            if (datetime.now() - criado).total_seconds() > 3600:
+                tokens.pop(t, None)
+        except:
+            tokens.pop(t, None)
+
+    gravar_json(ARQ_TOKENS, tokens)
+
+    # Monta o link
+    link = f"{URL_BASE}/redefinir-senha/{token}"
+
+    # Envia o email
+    try:
+        enviar_email_recuperacao(email, link, usuarios[email].get("nome", "aluno"))
+    except Exception as e:
+        print(f"⚠️ Erro ao enviar email: {e}")
+        return jsonify({"erro": "Não foi possível enviar o email. Tente novamente mais tarde."}), 500
+
+    return jsonify({"ok": True})
+
+
+# ============================================================
+# 📧 FUNÇÃO: ENVIAR EMAIL DE RECUPERAÇÃO
+# ============================================================
+def enviar_email_recuperacao(destinatario, link, nome):
+    """Envia o email com o link de recuperação."""
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "🦉 Desafiei — Redefinir sua senha"
+    msg["From"]    = f"Desafiei <{EMAIL_REMETENTE}>"
+    msg["To"]      = destinatario
+
+    # Corpo do email (HTML bonito)
+    corpo_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #eef5ff; padding: 20px; }}
+            .card {{ max-width: 500px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 8px 24px rgba(59,158,255,0.15); }}
+            h1 {{ color: #3b9eff; text-align: center; }}
+            .btn {{ display: inline-block; background: linear-gradient(135deg, #3b9eff, #6bc1ff); color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 800; margin: 20px 0; }}
+            .info {{ background: #f0f7ff; border-left: 4px solid #3b9eff; padding: 12px 16px; border-radius: 8px; font-size: 13px; color: #333; }}
+            .rodape {{ text-align: center; color: #888; font-size: 12px; margin-top: 24px; }}
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <div style="text-align: center; font-size: 60px;">🦉</div>
+            <h1>Olá, {nome}!</h1>
+            <p>Recebemos um pedido para redefinir a senha da sua conta no <strong>Desafiei</strong>.</p>
+            <p style="text-align: center;">
+                <a href="{link}" class="btn">🔐 Criar nova senha</a>
+            </p>
+            <div class="info">
+                ⏰ Este link é válido por <strong>30 minutos</strong>.<br>
+                Se você não pediu, ignore este email.
+            </div>
+            <div class="rodape">
+                Desafiei — Aprenda, jogue e evolua! 🦉
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
+    msg.attach(MIMEText(corpo_html, "html"))
+
+    # Envia via SMTP do Gmail
+    with smtplib.SMTP(EMAIL_SMTP, EMAIL_PORTA) as server:
+        server.starttls()
+        server.login(EMAIL_REMETENTE, EMAIL_SENHA)
+        server.send_message(msg)
+
+
+# ============================================================
+# 📧 API: REDEFINIR SENHA
+# ============================================================
+@app.route("/api/redefinir-senha", methods=["POST"])
+def api_redefinir_senha():
+    """Recebe o token + nova senha e redefine."""
+    dados = request.json or {}
+    token    = dados.get("token")
+    senha    = dados.get("senha", "")
+    confirma = dados.get("confirma", "")
+
+    if not token or not senha:
+        return jsonify({"erro": "Dados incompletos"}), 400
+
+    if len(senha) < 4:
+        return jsonify({"erro": "Senha muito curta (mínimo 4 caracteres)"}), 400
+
+    if senha != confirma:
+        return jsonify({"erro": "As senhas não coincidem"}), 400
+
+    # Valida token
+    tokens = ler_json(ARQ_TOKENS)
+    info = tokens.get(token)
+
+    if not info:
+        return jsonify({"erro": "Link inválido ou expirado"}), 400
+
+    # Verifica expiração (30 min)
+    try:
+        criado = datetime.fromisoformat(info["criado_em"])
+        if (datetime.now() - criado).total_seconds() > 30 * 60:
+            tokens.pop(token, None)
+            gravar_json(ARQ_TOKENS, tokens)
+            return jsonify({"erro": "Link expirado. Solicite um novo."}), 400
+    except:
+        return jsonify({"erro": "Link inválido"}), 400
+
+    # Atualiza a senha
+    email = info["email"]
+    usuarios = ler_json(ARQ_USUARIOS)
+
+    if email not in usuarios:
+        return jsonify({"erro": "Usuário não encontrado"}), 404
+
+    usuarios[email]["senha_hash"] = hash_senha(senha)
+    gravar_json(ARQ_USUARIOS, usuarios)
+
+    # Remove o token (uso único)
+    tokens.pop(token, None)
+    gravar_json(ARQ_TOKENS, tokens)
+
+    return jsonify({"ok": True})
 
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
@@ -375,6 +590,10 @@ def login():
         return jsonify({"erro": "Sua conta foi suspensa. Entre em contato com o suporte."}), 403
 
     session["usuario_email"] = email
+
+    if eh_admin(email):
+        return jsonify({"ok": True, "redirect": "/admin"})
+    
     return jsonify({"ok": True, "redirect": "/dashboard"})
 
 @app.route("/logout")
@@ -442,6 +661,21 @@ def api_meu_perfil():
     u["admin"] = eh_admin(email)
 
     return jsonify(u)
+
+
+@app.route("/api/tutorial-visto", methods=["POST"])
+def api_tutorial_visto():
+    """Marca o tutorial como visto no servidor (por usuário)."""
+    email = session.get("usuario_email")
+    if not email:
+        return jsonify({"erro": "Não logado"}), 401
+
+    usuarios = ler_json(ARQ_USUARIOS)
+    if email in usuarios:
+        usuarios[email]["tutorial_visto"] = True
+        gravar_json(ARQ_USUARIOS, usuarios)
+
+    return jsonify({"ok": True})
 
 
 @app.route("/api/recomendacao")
@@ -609,6 +843,9 @@ def api_desafio_pratica(dia):
 # ============================================================
 @app.route("/api/responder", methods=["POST"])
 def api_responder():
+    """Valida a resposta buscando a atividade em TODOS os dias do nível.
+    Dá XP cheio se for o dia atual, ou +5 XP se for modo prática.
+    """
     email = session.get("usuario_email")
     if not email:
         return jsonify({"erro": "Não logado"}), 401
@@ -629,15 +866,23 @@ def api_responder():
         nivel = "iniciante"
 
     dia_semana = DIAS[datetime.now().weekday()]
-
     dia_alvo = dia if dia in DIAS else dia_semana
-    desafio_alvo = desafios[nivel].get(dia_alvo, {})
 
-    # Busca a atividade
+    # ============================================================
+    # 🔥 BUSCA A ATIVIDADE EM TODOS OS 7 DIAS DO NÍVEL
+    # (porque o front recebe atividades embaralhadas de todos os dias)
+    # ============================================================
     atividade = None
-    for a in desafio_alvo.get("atividades", []):
-        if a["materia"] == materia and a["pergunta"] == pergunta:
-            atividade = a
+    dia_encontrado = None
+
+    for d in DIAS:
+        dia_info = desafios[nivel].get(d, {})
+        for a in dia_info.get("atividades", []):
+            if a["materia"] == materia and a["pergunta"] == pergunta:
+                atividade = a
+                dia_encontrado = d
+                break
+        if atividade:
             break
 
     if not atividade:
@@ -645,7 +890,9 @@ def api_responder():
 
     explicacao = atividade.get("explicacao", "Revise o conteúdo e tente novamente!")
 
-    # Errou
+    # ============================================================
+    # ERROU
+    # ============================================================
     if resposta != atividade["resposta"]:
         return jsonify({
             "acertou": False,
@@ -654,26 +901,34 @@ def api_responder():
             "mensagem": "❌ Resposta errada."
         })
 
-       # Acertou — mas é dia de hoje?
-    eh_dia_de_hoje = (dia_alvo == dia_semana)
+    # ============================================================
+    # ACERTOU — Verifica se é o dia de hoje
+    # ============================================================
+    # 🔥 Usa o dia ENCONTRADO (não o dia que o front mandou),
+    # porque a pergunta pode ter sido embaralhada de outro dia
+    eh_dia_de_hoje = (dia_encontrado == dia_semana)
 
+    multiplicador, periodo = calcular_multiplicador_xp()
+
+    # ------------------------------------------------------------
+    # MODO PRÁTICA — dias passados +5 XP
+    # ------------------------------------------------------------
     if not eh_dia_de_hoje:
-        # 🔥 MODO PRÁTICA: ganha 5 XP fixos por acerto
         XP_PRATICA = 5
 
-        estagio_antes = calcular_estagio(u["xp"])
-        u["xp"] += XP_PRATICA
+        estagio_antes = calcular_estagio(u.get("xp", 0))
+        u["xp"] = u.get("xp", 0) + XP_PRATICA
         u["estagio"] = calcular_estagio(u["xp"])
         subiu_estagio = (u["estagio"] != estagio_antes)
 
-        # Registra no histórico (para o gráfico e estatísticas)
+        # Registra no histórico
         u.setdefault("historico", []).append({
             "data": datetime.now().isoformat(),
             "materia": materia,
             "pergunta": pergunta,
             "acertou": True,
             "xp": XP_PRATICA,
-            "pratica": True,      # marca como prática
+            "pratica": True,
         })
 
         gravar_json(ARQ_USUARIOS, usuarios)
@@ -688,15 +943,28 @@ def api_responder():
             "estagio_anterior": estagio_antes,
             "mensagem": f"✅ Acertou! +{XP_PRATICA} XP (prática)"
         })
-    
-    # É dia de hoje — dá XP normalmente
-    multiplicador, periodo = calcular_multiplicador_xp()
-    if periodo == "madrugada":
-        return jsonify({"erro": "🌙 Não é possível ganhar XP na madrugada."}), 403
 
-    estagio_antes = calcular_estagio(u["xp"])
-    xp_ganho = int(atividade["xp"] * multiplicador)
-    u["xp"] += xp_ganho
+    # ------------------------------------------------------------
+    # MODO NORMAL — dia atual, XP cheio + multiplicador
+    # ------------------------------------------------------------
+    # 🌙 Bloqueia na madrugada (mas só se o aluno ainda não respondeu hoje)
+    if periodo == "madrugada":
+        # Ainda permite responder, mas sem XP
+        return jsonify({
+            "acertou": True,
+            "xp_ganho": 0,
+            "pratica": True,
+            "xp_total": u.get("xp", 0),
+            "estagio": u.get("estagio", "Latão I"),
+            "subiu_estagio": False,
+            "mensagem": "🌙 Na madrugada não se ganha XP. Descanse!"
+        })
+
+    estagio_antes = calcular_estagio(u.get("xp", 0))
+    xp_base = atividade.get("xp", 15)
+    xp_ganho = int(xp_base * multiplicador)
+
+    u["xp"] = u.get("xp", 0) + xp_ganho
     u["estagio"] = calcular_estagio(u["xp"])
     subiu_estagio = (u["estagio"] != estagio_antes)
 
@@ -709,6 +977,7 @@ def api_responder():
     })
 
     gravar_json(ARQ_USUARIOS, usuarios)
+
     return jsonify({
         "acertou": True,
         "xp_ganho": xp_ganho,
@@ -719,12 +988,12 @@ def api_responder():
         "estagio_anterior": estagio_antes
     })
 
-
 # ============================================================
 # API: XP DIÁRIO (1x por dia)
 # ============================================================
 @app.route("/api/xp-diario")
 def api_xp_diario():
+    """Entrega XP diário (1x por dia) + BÔNUS de 100 XP aos 7 dias de ofensiva."""
     email = session.get("usuario_email")
     if not email:
         return jsonify({"erro": "Não logado"}), 401
@@ -733,27 +1002,40 @@ def api_xp_diario():
     u = usuarios[email]
     hoje = date.today().isoformat()
 
+    # Já ganhou hoje?
     if u.get("ultimo_xp_diario") == hoje:
         return jsonify({"ganhou": False, "xp_total": u["xp"]})
 
+    # Calcula ofensiva
     ontem = (date.today() - timedelta(days=1)).isoformat()
     if u.get("ultimo_dia_logado") == ontem:
         u["ofensiva"] = u.get("ofensiva", 0) + 1
     else:
         u["ofensiva"] = 1
 
+    # 🎁 BÔNUS DE 100 XP AOS 7 DIAS DE OFENSIVA
+    bonus_ofensiva = 0
+    ofensiva_atual = u["ofensiva"]
+
+    # Só dá o bônus se for exatamente 7, 14, 21, 28... (múltiplos de 7)
+    if ofensiva_atual > 0 and ofensiva_atual % 7 == 0:
+        bonus_ofensiva = 100
+
+    # Salva dados
     u["ultimo_dia_logado"] = hoje
     u["ultimo_xp_diario"]  = hoje
-    u["xp"] += 10
+    u["xp"] += 10 + bonus_ofensiva     # XP diário (10) + bônus
     u["estagio"] = calcular_estagio(u["xp"])
     u["primeiro_acesso"] = False
 
     gravar_json(ARQ_USUARIOS, usuarios)
+
     return jsonify({
         "ganhou": True,
-        "xp_ganho": 10,
+        "xp_ganho": 10 + bonus_ofensiva,
+        "bonus_ofensiva": bonus_ofensiva,           # 👈 NOVO
+        "ofensiva": ofensiva_atual,
         "xp_total": u["xp"],
-        "ofensiva": u["ofensiva"],
         "estagio": u["estagio"]
     })
 

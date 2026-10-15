@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Redefinir senha • Desafiei</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/coruja.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width:480px;margin-top:60px" id="conteudo-principal">
+
+        {% if valido %}
+        <!-- ============================================
+             FORMULÁRIO DE REDEFINIÇÃO
+             ============================================ -->
+        <div class="card fade-in" style="text-align:center;padding:36px 24px">
+            <div style="font-size:72px;line-height:1;margin-bottom:8px">🔑</div>
+            <h1 style="background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px">
+                Criar nova senha
+            </h1>
+            <p style="color:var(--texto-sec);font-weight:500">
+                Escolha uma nova senha para sua conta.
+            </p>
+        </div>
+
+        <div class="card fade-in" id="card-form">
+            <form onsubmit="redefinirSenha(event)">
+                <input type="hidden" name="token" value="{{ token }}">
+
+                <label>Nova senha</label>
+                <input type="password" name="senha" minlength="4" required autofocus placeholder="••••••••">
+
+                <label>Confirme a nova senha</label>
+                <input type="password" name="confirma" minlength="4" required placeholder="••••••••">
+
+                <button class="btn" type="submit" style="width:100%;margin-top:8px">
+                    🔐 Redefinir senha
+                </button>
+            </form>
+        </div>
+
+        {% else %}
+        <!-- ============================================
+             LINK INVÁLIDO / EXPIRADO
+             ============================================ -->
+        <div class="card fade-in" style="text-align:center;padding:36px 24px">
+            <div style="font-size:72px;line-height:1;margin-bottom:8px">❌</div>
+            <h1 style="color:var(--erro)">Link inválido</h1>
+            <p style="color:var(--texto-sec);font-weight:500;margin-top:8px">
+                {{ motivo }}
+            </p>
+            <a href="/esqueci-senha" class="btn" style="margin-top:20px">
+                🔄 Solicitar novo link
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Coruja -->
+    <div class="coruja-guia" id="coruja-guia">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+
+    <script>
+        async function redefinirSenha(event) {
+            event.preventDefault();
+            const form = event.target;
+            const dados = new FormData(form);
+            const senha = dados.get("senha");
+            const confirma = dados.get("confirma");
+            const token = dados.get("token");
+
+            // Verifica se as senhas coincidem ANTES de enviar
+            if (senha !== confirma) {
+                mostrarErro("As senhas não coincidem!");
+                return;
+            }
+
+            if (senha.length < 4) {
+                mostrarErro("A senha deve ter no mínimo 4 caracteres.");
+                return;
+            }
+
+            const botao = form.querySelector("button");
+            botao.disabled = true;
+            botao.textContent = "Redefinindo...";
+
+            try {
+                const resp = await fetch("/api/redefinir-senha", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token, senha, confirma })
+                });
+                const json = await resp.json();
+
+                if (json.ok) {
+                    // ✅ SUCESSO → mostra tela e volta para index
+                    mostrarSucesso();
+                } else {
+                    // ❌ ERRO → mostra mensagem e mantém no formulário
+                    mostrarErro(json.erro || "Erro ao redefinir senha");
+                    botao.disabled = false;
+                    botao.textContent = "🔐 Redefinir senha";
+                }
+            } catch (e) {
+                mostrarErro("Erro de conexão. Tente novamente.");
+                botao.disabled = false;
+                botao.textContent = "🔐 Redefinir senha";
+            }
+        }
+
+        /** Tela de SUCESSO com transição */
+        function mostrarSucesso() {
+            const container = document.getElementById("conteudo-principal");
+            container.innerHTML = `
+                <div class="card fade-in" style="text-align:center;padding:44px 28px;animation: final-entra 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)">
+                    <div style="font-size:80px;line-height:1;margin-bottom:12px;animation: festa-gira 2s infinite">✅</div>
+                    <h1 style="background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                        Senha redefinida!
+                    </h1>
+                    <p style="color:var(--texto-sec);font-size:16px;line-height:1.6;margin:16px 0 24px">
+                        Sua senha foi atualizada com sucesso.<br>
+                        Você será redirecionado(a) para o login em <strong>3 segundos</strong>...
+                    </p>
+                    <a href="/" class="btn">🚀 Ir para o login agora</a>
+                </div>
+            `;
+
+            // Solta confetes
+            soltarConfetesLocais();
+
+            // Redireciona depois de 3 segundos
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 3000);
+        }
+
+        /** Tela de ERRO com transição */
+        function mostrarErro(mensagem) {
+            const container = document.getElementById("conteudo-principal");
+            const htmlAtual = container.innerHTML;
+
+            // Cria overlay de erro
+            const overlay = document.createElement("div");
+            overlay.className = "card fade-in";
+            overlay.style.cssText = `
+                text-align:center;
+                padding:24px;
+                margin-top:20px;
+                border: 2px solid var(--erro);
+                background: linear-gradient(135deg, rgba(255,92,122,0.08), rgba(255,92,122,0.04));
+            `;
+            overlay.innerHTML = `
+                <div style="font-size:52px;margin-bottom:8px">❌</div>
+                <h3 style="color:var(--erro);margin-bottom:8px">Ops!</h3>
+                <p style="color:var(--texto-sec)">${mensagem}</p>
+            `;
+
+            // Remove overlay anterior se existir
+            const anterior = document.getElementById("overlay-erro");
+            if (anterior) anterior.remove();
+
+            overlay.id = "overlay-erro";
+            container.appendChild(overlay);
+
+            // Remove depois de 3s
+            setTimeout(() => overlay.remove(), 3000);
+        }
+
+        /** Confetes simples para a tela de sucesso */
+        function soltarConfetesLocais() {
+            const cores = ["#3b9eff", "#ffcc4d", "#00d68f", "#8b7cf6", "#ff5c7a"];
+            for (let i = 0; i < 40; i++) {
+                const confete = document.createElement("div");
+                confete.className = "confete";
+                confete.style.left = Math.random() * 100 + "vw";
+                confete.style.background = cores[Math.floor(Math.random() * cores.length)];
+                confete.style.animationDuration = (2 + Math.random() * 2) + "s";
+                confete.style.animationDelay = (Math.random() * 0.5) + "s";
+                document.body.appendChild(confete);
+                setTimeout(() => confete.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>

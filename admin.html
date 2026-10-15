@@ -61,11 +61,21 @@
             </div>
         </div>
 
-        <!-- ABA: MATÉRIAS -->
+                <!-- ABA: MATÉRIAS -->
         <div id="aba-materias" class="aba-conteudo" style="display:none">
             <div class="card fade-in">
                 <h2 style="margin-bottom:16px">📚 Desempenho por matéria</h2>
-                <canvas id="grafico-materias" height="280"></canvas>
+
+                <!-- ⬇️ Wrapper com altura fixa para o gráfico não esticar ⬇️ -->
+                <div class="grafico-wrapper">
+                    <canvas id="grafico-materias"></canvas>
+                </div>
+
+                <!-- Mensagem quando não há dados -->
+                <div id="sem-dados-materias" style="display:none;text-align:center;padding:40px 20px;color:var(--texto-sec)">
+                    <div style="font-size:52px;margin-bottom:8px">📊</div>
+                    <p>Sem dados ainda. Os gráficos aparecerão quando os alunos começarem a responder os desafios.</p>
+                </div>
             </div>
         </div>
     </div>

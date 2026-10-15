@@ -304,17 +304,29 @@ async function carregarDeletados() {
 // ------------------------------------------------------------
 // GRÁFICO DE MATÉRIAS (geral do site)
 // ------------------------------------------------------------
+// ------------------------------------------------------------
+// GRÁFICO DE MATÉRIAS (geral do site) — VERSÃO COM LEGENDA
+// ------------------------------------------------------------
 async function carregarGraficoMaterias() {
     try {
         const resp = await fetch("/api/admin/usuarios");
         const usuarios = await resp.json();
 
+        if (!usuarios || usuarios.length === 0) {
+            mostrarSemDadosMaterias();
+            return;
+        }
+
         // Agrega acertos de todos os usuários por matéria
         const porMateria = {};
         for (const u of usuarios) {
-            const det = await fetch(`/api/admin/usuario/${encodeURIComponent(u.email)}`).then(r => r.json());
-            for (const [m, qtd] of Object.entries(det.acertos_por_materia || {})) {
-                porMateria[m] = (porMateria[m] || 0) + qtd;
+            try {
+                const det = await fetch(`/api/admin/usuario/${encodeURIComponent(u.email)}`).then(r => r.json());
+                for (const [m, qtd] of Object.entries(det.acertos_por_materia || {})) {
+                    porMateria[m] = (porMateria[m] || 0) + qtd;
+                }
+            } catch (e) {
+                console.warn("Erro ao buscar detalhes de", u.email, e);
             }
         }
 
@@ -322,42 +334,98 @@ async function carregarGraficoMaterias() {
         const valores = Object.values(porMateria);
 
         if (labels.length === 0) {
-            document.getElementById("grafico-materias").parentElement.innerHTML +=
-                '<p style="text-align:center;color:var(--texto-sec)">Sem dados ainda.</p>';
+            mostrarSemDadosMaterias();
             return;
         }
 
-        new Chart(document.getElementById("grafico-materias"), {
-            type: "bar",
+        // Ordena do maior para o menor
+        const ordenado = labels.map((l, i) => ({ m: l, v: valores[i] }))
+                              .sort((a, b) => b.v - a.v);
+        const labelsOrd = ordenado.map(o => o.m);
+        const valoresOrd = ordenado.map(o => o.v);
+
+        const canvas = document.getElementById("grafico-materias");
+        if (!canvas) return;
+
+        new Chart(canvas, {
+            type: "doughnut",
             data: {
-                labels,
+                labels: labelsOrd,
                 datasets: [{
                     label: "Total de acertos",
-                    data: valores,
+                    data: valoresOrd,
                     backgroundColor: [
-                        "rgba(59, 158, 255, 0.7)",
-                        "rgba(255, 204, 77, 0.7)",
-                        "rgba(0, 214, 143, 0.7)",
-                        "rgba(139, 124, 246, 0.7)",
-                        "rgba(255, 92, 122, 0.7)",
+                        "rgba(59, 158, 255, 0.85)",    // Azul
+                        "rgba(255, 204, 77, 0.85)",    // Amarelo
+                        "rgba(0, 214, 143, 0.85)",     // Verde
+                        "rgba(139, 124, 246, 0.85)",   // Roxo
+                        "rgba(255, 92, 122, 0.85)",    // Vermelho
+                        "rgba(90, 200, 250, 0.85)",    // Azul claro
                     ],
-                    borderRadius: 10,
+                    borderColor: "var(--card-solid)",
+                    borderWidth: 3,
+                    hoverOffset: 10,                   // Destaque ao passar o mouse
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
+                cutout: "60%",                         // Grossura da rosca
+                layout: {
+                    padding: { top: 10, bottom: 10, left: 10, right: 10 }
                 },
-                scales: {
-                    y: { beginAtZero: true }
+                plugins: {
+                    // 🏷️ LEGENDA ABAIXO DO GRÁFICO
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        align: "center",
+                        labels: {
+                            color: "#0f1c2e",
+                            font: {
+                                family: "Plus Jakarta Sans",
+                                size: 13,
+                                weight: "700"
+                            },
+                            padding: 14,
+                            usePointStyle: true,
+                            pointStyle: "circle",
+                            boxWidth: 12,
+                            boxHeight: 12,
+                        }
+                    },
+
+                    // 💡 TOOLTIP MELHORADO (com %)
+                    tooltip: {
+                        backgroundColor: "#0f1c2e",
+                        padding: 14,
+                        cornerRadius: 10,
+                        titleFont: { family: "Outfit", size: 14, weight: "700" },
+                        bodyFont:  { family: "Plus Jakarta Sans", size: 13 },
+                        callbacks: {
+                            label: (ctx) => {
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const valor = ctx.parsed;
+                                const perc = total ? Math.round((valor / total) * 100) : 0;
+                                return `  ${valor} acerto${valor !== 1 ? "s" : ""} (${perc}%)`;
+                            }
+                        }
+                    }
                 }
             }
         });
     } catch (e) {
         console.warn("Erro no gráfico:", e);
+        mostrarSemDadosMaterias();
     }
+}
+
+/** Mostra a mensagem "sem dados" e esconde o gráfico */
+function mostrarSemDadosMaterias() {
+    const wrapper = document.querySelector(".grafico-wrapper");
+    const msg = document.getElementById("sem-dados-materias");
+    if (wrapper) wrapper.style.display = "none";
+    if (msg) msg.style.display = "block";
 }
 
 // ------------------------------------------------------------

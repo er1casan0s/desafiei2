@@ -18,12 +18,13 @@
 <body>
     <div class="container" style="max-width:820px">
 
-        <!-- Botão voltar -->
-        <div class="card fade-in" style="padding:10px;display:flex;justify-content:space-between;align-items:center">
-           <a href="#" onclick="event.preventDefault(); transicaoBolha('/dashboard')" class="btn btn-secundario">⬅️ Sair</a>
+              <div class="card fade-in" style="padding:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <div style="display:flex;gap:8px">
+                <a href="#" onclick="event.preventDefault(); transicaoBolha('/dashboard')" class="btn btn-secundario">⬅️ Voltar</a>
+                <a href="/logout" class="btn btn-perigo">🚪 Sair</a>
+            </div>
             <div id="titulo-desafio" style="font-weight:800;color:var(--texto-sec)">Carregando...</div>
         </div>
-
         <!-- Área do fluxo de atividades -->
         <div id="area-desafio" class="fade-in"></div>
     </div>

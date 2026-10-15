@@ -84,10 +84,7 @@
         <div id="area-desafio" class="fade-in" style="animation-delay:0.1s"></div>
     </div>
 
-    <!-- Coruja -->
-    <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
-    <div class="coruja-balao" id="coruja-balao"></div>
-
+   
     <!-- ============================================================
          BOTÃO FIXO DE ACESSIBILIDADE + PAINEL
          ============================================================ -->
@@ -140,6 +137,14 @@ if ("Notification" in window && Notification.permission === "default") {
     }, { once: true });
 }
 </script>
+
+
+ <!-- Coruja -->
+    <div class="coruja-guia" id="coruja-guia" title="Clique para ver o tutorial">🦉</div>
+    <div class="coruja-balao" id="coruja-balao"></div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/coruja.js') }}"></script>   <!-- 👈 Confirme esta linha -->
 
 </body>
 </html>

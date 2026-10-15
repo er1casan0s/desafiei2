@@ -966,13 +966,31 @@ async function checarXpDiario() {
     const json = await resp.json();
 
     if (json.ganhou) {
-        setTimeout(() => {
-            alert(`🎉 Bem-vindo(a) de volta! +${json.xp_ganho} XP pela ofensiva!\nOfensiva: ${json.ofensiva} dias 🔥`);
-        }, 800);
+        // 🎁 Se ganhou bônus de 100 XP por ofensiva de 7 dias
+        if (json.bonus_ofensiva && json.bonus_ofensiva > 0) {
+            setTimeout(() => {
+                alert(
+                    `🎉 Bem-vindo(a) de volta!\n\n` +
+                    `+${json.xp_ganho - json.bonus_ofensiva} XP diário\n` +
+                    `+${json.bonus_ofensiva} XP BÔNUS (${json.ofensiva} dias de ofensiva! 🔥)\n\n` +
+                    `Ofensiva: ${json.ofensiva} dias\n` +
+                    `XP Total: ${json.xp_total}`
+                );
+            }, 800);
+
+            // 🎊 Solta confetes pelo bônus
+            setTimeout(() => {
+                if (typeof soltarConfetes === "function") soltarConfetes();
+            }, 1200);
+        } else {
+            // Mensagem normal
+            setTimeout(() => {
+                alert(`🎉 Bem-vindo(a) de volta! +${json.xp_ganho} XP pela ofensiva!\nOfensiva: ${json.ofensiva} dias 🔥`);
+            }, 800);
+        }
     }
     atualizarCabecalho();
 }
-
 
 // ============================================================
 // ANOTAÇÕES (madrugada)
@@ -1197,6 +1215,13 @@ function atualizarBotaoSom() {
     const btn = document.getElementById("btn-som");
     if (btn) btn.textContent = _somAtivo ? "Ligado" : "Desligado";
 }
+
+
+fetch("/api/desafio-hoje").then(r => r.json()).then(d => {
+    console.log("Nível:", d.nivel);
+    console.log("Total de atividades:", d.desafio?.atividades?.length);
+    console.log("Primeira atividade:", d.desafio?.atividades?.[0]);
+});
 
 // ============================================================
 // INICIALIZAÇÃO (UM ÚNICO listener!)
